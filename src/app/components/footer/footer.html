@@ -1,0 +1,39 @@
+<footer class="bg-gray-900 text-white py-12">
+  <div class="section-container">
+    <div class="flex flex-col lg:flex-row justify-between items-center">
+      <!-- Logo and Copyright -->
+      <div class="mb-6 lg:mb-0 text-center lg:text-left">
+        <div class="text-2xl font-bold mb-2">
+          Zahed<span class="text-blue-600">Dev</span>
+        </div>
+        <p class="text-gray-400 text-sm">
+          &copy; 2024 Zahed Hasan. All rights reserved.
+        </p>
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="flex flex-wrap justify-center gap-6 mb-6 lg:mb-0">
+        @for (item of quickLinks; track item.name) {
+          <a 
+            [routerLink]="item.path"
+            class="text-gray-400 hover:text-white transition-colors duration-300">
+            {{ item.name }}
+          </a>
+        }
+      </div>
+      
+      <!-- Social Links -->
+      <div class="flex gap-4">
+        @for (social of socialLinks; track social.name) {
+          <a 
+            [href]="social.url"
+            target="_blank"
+            class="text-gray-400 hover:text-white transition-colors duration-300 p-2"
+            [attr.aria-label]="social.name">
+            {{ social.icon }}
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</footer>
