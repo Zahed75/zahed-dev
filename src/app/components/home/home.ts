@@ -9,12 +9,6 @@ interface Service {
   tech: string[];
 }
 
-interface Technology {
-  name: string;
-  logo: string;
-  category: string;
-}
-
 interface Experience {
   company: string;
   role: string;
@@ -23,16 +17,9 @@ interface Experience {
   tech: string[];
 }
 
-interface ProcessStep {
-  step: string;
-  title: string;
-  description: string;
-}
-
-interface TechCategory {
-  name: string;
-  icon: string;
-  count: number;
+interface TechStat {
+  value: string;
+  label: string;
 }
 
 @Component({
@@ -44,6 +31,7 @@ interface TechCategory {
 export class HomeComponent {
   profileImageLoaded: boolean = false;
 
+  // Services Data
   services: Service[] = [
     {
       title: 'Enterprise Web Development',
@@ -83,55 +71,36 @@ export class HomeComponent {
     }
   ];
 
-  technologies: Technology[] = [
-    { name: 'Angular', logo: '/assets/tech-logos/angular.svg', category: 'Frontend' },
-    { name: 'TypeScript', logo: '/assets/tech-logos/typescript.svg', category: 'Language' },
-    { name: 'Node.js', logo: '/assets/tech-logos/nodejs.svg', category: 'Backend' },
-    { name: 'Express.js', logo: '/assets/tech-logos/express.svg', category: 'Backend' },
-    { name: 'Django', logo: '/assets/tech-logos/django.svg', category: 'Backend' },
-    { name: 'Django REST', logo: '/assets/tech-logos/django-rest.svg', category: 'API' },
-    { name: 'Python', logo: '/assets/tech-logos/python.svg', category: 'Language' },
-    { name: 'Flutter', logo: '/assets/tech-logos/flutter.svg', category: 'Mobile' },
-    { name: 'PostgreSQL', logo: '/assets/tech-logos/postgresql.svg', category: 'Database' },
-    { name: 'MySQL', logo: '/assets/tech-logos/mysql.svg', category: 'Database' },
-    { name: 'MongoDB', logo: '/assets/tech-logos/mongodb.svg', category: 'Database' },
-    { name: 'Redis', logo: '/assets/tech-logos/redis.svg', category: 'Cache' },
-    { name: 'AWS', logo: '/assets/tech-logos/aws.svg', category: 'Cloud' },
-    { name: 'Docker', logo: '/assets/tech-logos/docker.svg', category: 'DevOps' },
-    { name: 'Kubernetes', logo: '/assets/tech-logos/kubernetes.svg', category: 'DevOps' },
-    { name: 'Git', logo: '/assets/tech-logos/git.svg', category: 'Tools' },
-    { name: 'GitHub Actions', logo: '/assets/tech-logos/github-actions.svg', category: 'CI/CD' },
-    { name: 'Nginx', logo: '/assets/tech-logos/nginx.svg', category: 'Server' }
+  // Compact Tech Stack Data
+  frontendTech: string[] = [
+    'Angular', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'RxJS'
   ];
 
-  techCategories: TechCategory[] = [
-    { name: 'Frontend', icon: '🎨', count: 2 },
-    { name: 'Backend', icon: '⚙️', count: 5 },
-    { name: 'Database', icon: '🗄️', count: 4 },
-    { name: 'DevOps', icon: '🔗', count: 4 }
+  backendTech: string[] = [
+    'Node.js', 'Express.js', 'Django', 'Django REST', 'Python', 'REST APIs', 'GraphQL'
   ];
 
-  processSteps: ProcessStep[] = [
-    {
-      step: '1',
-      title: 'Discovery & Planning',
-      description: 'Understanding your business needs and defining project scope, goals, and technical requirements.'
-    },
-    {
-      step: '2',
-      title: 'Architecture Design',
-      description: 'Creating scalable system architecture, database design, and technology stack selection.'
-    },
-    {
-      step: '3',
-      title: 'Development & Testing',
-      description: 'Agile development with continuous testing, code reviews, and quality assurance.'
-    },
-    {
-      step: '4',
-      title: 'Deployment & Support',
-      description: 'CI/CD deployment, monitoring, and ongoing maintenance with performance optimization.'
-    }
+  mobileDbTech: string[] = [
+    'Flutter', 'Dart', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQLite'
+  ];
+
+  devopsTech: string[] = [
+    'AWS', 'Docker', 'Kubernetes', 'CI/CD', 'GitHub Actions', 'Nginx', 'Linux'
+  ];
+
+  toolsTech: string[] = [
+    'Git', 'GitHub', 'Postman', 'VS Code', 'Jira', 'Figma', 'Swagger'
+  ];
+
+  learningTech: string[] = [
+    'React Native', 'Next.js', 'GraphQL', 'Serverless'
+  ];
+
+  techStats: TechStat[] = [
+    { value: '25+', label: 'Technologies' },
+    { value: '5+', label: 'Years Experience' },
+    { value: '50+', label: 'Projects Completed' },
+    { value: '99%', label: 'Client Satisfaction' }
   ];
 
   experiences: Experience[] = [

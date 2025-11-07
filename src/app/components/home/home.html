@@ -1,5 +1,5 @@
 <main class="min-h-screen bg-white">
-  <!-- Hero Section (Keeping as is) -->
+  <!-- Hero Section -->
   <section class="pt-20 pb-16 lg:pt-28 lg:pb-24 bg-gradient-to-br from-gray-50 to-white">
     <div class="section-container">
       <div class="grid lg:grid-cols-3 gap-12 items-center">
@@ -129,103 +129,142 @@
     </div>
   </section>
 
-  <!-- Tech Stack Section - Modern Grid -->
-  <section class="py-20 bg-gray-50">
+  <!-- Compact Tech Stack Section -->
+  <section class="py-16 bg-gray-50">
     <div class="section-container">
-      <div class="text-center mb-16">
+      <div class="text-center mb-12">
         <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
           Technology Stack
         </h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Cutting-edge technologies I use to build robust, scalable, and high-performance applications
+          Proficient in modern technologies for building scalable and efficient applications
         </p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-        <div *ngFor="let tech of technologies; let i = index" 
-             class="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+      <!-- Compact Tech Stack Grid -->
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           
-          <!-- Tech Logo Container -->
-          <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-gray-100 transition-colors duration-300 p-3">
-            <!-- Fallback text if logo not available -->
-            <div *ngIf="!tech.logo" class="text-2xl font-bold text-gray-400">
-              {{ tech.name.substring(0,2) }}
+          <!-- Frontend Technologies -->
+          <div class="group bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg">🎨</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">Frontend</h3>
             </div>
-            <img *ngIf="tech.logo" 
-                 [src]="tech.logo" 
-                 [alt]="tech.name + ' logo'" 
-                 class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let tech of frontendTech" 
+                    class="tech-pill group-hover:scale-105">
+                {{ tech }}
+              </span>
+            </div>
           </div>
-          
-          <!-- Tech Info -->
-          <div class="text-center">
-            <h3 class="font-semibold text-gray-900 text-sm mb-1 group-hover:text-black transition-colors duration-300">
-              {{ tech.name }}
-            </h3>
-            <p class="text-gray-500 text-xs">{{ tech.category }}</p>
+
+          <!-- Backend Technologies -->
+          <div class="group bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg">⚙️</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">Backend</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let tech of backendTech" 
+                    class="tech-pill group-hover:scale-105">
+                {{ tech }}
+              </span>
+            </div>
           </div>
-          
-          <!-- Hover Border Effect -->
-          <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-black/10 transition-all duration-300 pointer-events-none"></div>
+
+          <!-- Mobile & Database -->
+          <div class="group bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg">📱</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">Mobile & Database</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let tech of mobileDbTech" 
+                    class="tech-pill group-hover:scale-105">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <!-- DevOps & Cloud -->
+          <div class="group bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg">☁️</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">DevOps & Cloud</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let tech of devopsTech" 
+                    class="tech-pill group-hover:scale-105">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Tools & Others -->
+          <div class="group bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg">🛠️</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">Tools & Others</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let tech of toolsTech" 
+                    class="tech-pill group-hover:scale-105">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Currently Learning -->
+          <div class="group bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-gradient-to-r from-gray-600 to-gray-800 rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg">🚀</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">Currently Learning</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let tech of learningTech" 
+                    class="tech-pill-learning group-hover:scale-105">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Tech Categories -->
-      <div class="grid md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-gray-200">
-        <div *ngFor="let category of techCategories" class="text-center">
-          <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
-            <span class="text-white text-lg">{{ category.icon }}</span>
+      <!-- Tech Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
+        <div *ngFor="let stat of techStats" class="text-center group">
+          <div class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2 group-hover:scale-110 transition-transform duration-300">
+            {{ stat.value }}
           </div>
-          <h3 class="font-bold text-gray-900 mb-2">{{ category.name }}</h3>
-          <p class="text-gray-600 text-sm">{{ category.count }} Technologies</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process Section -->
-  <section class="py-20 bg-white">
-    <div class="section-container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-          My Development Process
-        </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          A structured approach to delivering high-quality, scalable solutions
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div *ngFor="let step of processSteps; let i = index" 
-             class="text-center group">
-          
-          <!-- Step Number -->
-          <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
-            {{ step.step }}
-            <div class="absolute inset-0 rounded-full border-2 border-black opacity-0 group-hover:opacity-100 animate-ping"></div>
-          </div>
-          
-          <!-- Step Content -->
-          <h3 class="text-lg font-bold text-gray-900 mb-4">{{ step.title }}</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">{{ step.description }}</p>
-          
-          <!-- Connecting Line (except last item) -->
-          <div *ngIf="i < processSteps.length - 1" 
-               class="hidden lg:block absolute top-8 left-1/2 w-full h-0.5 bg-gray-200 -z-10"></div>
+          <div class="text-gray-600 text-sm">{{ stat.label }}</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Experience Highlights -->
-  <section class="py-20 bg-gray-50">
+  <section class="py-20 bg-white">
     <div class="section-container">
       <div class="text-center mb-16">
         <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-          Enterprise Experience
+          Professional Experience
         </h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Delivering measurable results for industry leaders
+          Building scalable solutions for industry leaders and transforming business operations
         </p>
       </div>
 
