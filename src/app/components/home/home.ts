@@ -34,7 +34,7 @@ export class HomeComponent {
   // Services Data
   services: Service[] = [
     {
-      title: 'Enterprise Web Development',
+      title: 'Enterprise Software Solution',
       description: 'Scalable web applications using Angular with robust backend APIs and microservices architecture.',
       icon: '⚡',
       tech: ['Angular', 'Node.js', 'Django', 'PostgreSQL']
@@ -93,21 +93,16 @@ export class HomeComponent {
   ];
 
   learningTech: string[] = [
-    'React Native', 'Next.js', 'GraphQL', 'Serverless'
+    'Odoo', 'AI', 'GraphQL', 'Serverless'
   ];
 
-  techStats: TechStat[] = [
-    { value: '25+', label: 'Technologies' },
-    { value: '5+', label: 'Years Experience' },
-    { value: '50+', label: 'Projects Completed' },
-    { value: '99%', label: 'Client Satisfaction' }
-  ];
+
 
   experiences: Experience[] = [
     {
       company: 'ACI Logistics Ltd.',
       role: 'Software Engineer Level-II',
-      period: 'May 2024 - Present',
+      period: 'March 2025 - Present',
       highlights: [
         'Developed Flutter apps for 700+ retail outlets',
         'Implemented real-time logistics management',
@@ -115,6 +110,7 @@ export class HomeComponent {
       ],
       tech: ['Flutter', 'Angular', 'Django REST', 'PostgreSQL']
     },
+
     {
       company: 'Best Electronics Ltd.',
       role: 'Deputy Manager (Software Engineer)',
