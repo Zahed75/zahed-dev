@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 interface NavItem {
   name: string;
   path: string;
-  id: string;
+  icon?: string;
 }
 
 @Component({
@@ -19,18 +19,16 @@ export class NavbarComponent {
   isMobileMenuOpen: boolean = false;
 
   navItems: NavItem[] = [
-    { name: 'Home', path: '/', id: 'home' },
-    { name: 'Projects', path: '/projects', id: 'projects' },
-    { name: 'Portfolio', path: '/portfolio', id: 'portfolio' },
-    { name: 'Case Study', path: '/case-study', id: 'case-study' },
-    { name: 'Client Feedback', path: '/feedback', id: 'feedback' },
-    { name: 'Freelance', path: '/freelance', id: 'freelance' },
-    { name: 'Contact', path: '/contact', id: 'contact' }
+    { name: 'Home', path: '/', icon: '🏠' },
+    { name: 'Work', path: '/projects', icon: '💼' },
+    { name: 'Experience', path: '/portfolio', icon: '🚀' },
+    { name: 'Case Studies', path: '/case-study', icon: '📊' },
+    { name: 'Contact', path: '/contact', icon: '📞' }
   ];
 
   @HostListener('window:scroll')
   onWindowScroll(): void {
-    this.isScrolled = window.scrollY > 50;
+    this.isScrolled = window.scrollY > 20;
   }
 
   toggleMobileMenu(): void {
@@ -39,10 +37,5 @@ export class NavbarComponent {
 
   closeMobileMenu(): void {
     this.isMobileMenuOpen = false;
-  }
-
-  navigateToContact(): void {
-    this.closeMobileMenu();
-    console.log('Navigating to contact page');
   }
 }

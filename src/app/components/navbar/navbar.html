@@ -1,74 +1,106 @@
-<nav 
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
-  [class]="isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg py-2' : 'bg-transparent py-4'">
+<!-- Modern Black & White Navbar -->
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+     [class]="isScrolled ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-gray-100 py-3' : 'bg-transparent py-6'">
   
   <div class="section-container">
-    <div class="flex justify-between items-center">
+    <div class="flex items-center justify-between">
       
-      <!-- Logo -->
-      <div class="flex-shrink-0">
-        <a 
-          routerLink="/" 
-          class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
-          Zahed<span class="text-blue-600">Dev</span>
-        </a>
-      </div>
+      <!-- Logo - Minimalist Black & White -->
+      <a routerLink="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-gray-500/25 transition-all duration-300">
+          <span class="text-white font-bold text-sm">ZH</span>
+        </div>
+        <div class="hidden sm:block">
+          <div class="text-lg font-semibold text-gray-900">Zahed Hasan</div>
+          <div class="text-xs text-gray-500 font-medium">Full-Stack Engineer</div>
+        </div>
+      </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center space-x-8">
+      <!-- Desktop Navigation - Centered & Clean -->
+      <div class="hidden lg:flex items-center space-x-1">
         @for (item of navItems; track item.name) {
           <a 
             [routerLink]="item.path"
-            class="nav-link text-sm uppercase tracking-wide">
+            class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:text-black hover:bg-gray-50 transition-all duration-200 font-medium text-sm group"
+            routerLinkActive="text-black bg-gray-100"
+            [routerLinkActiveOptions]="{exact: true}">
+            <span class="text-base">{{ item.icon }}</span>
             {{ item.name }}
           </a>
         }
       </div>
 
-      <!-- CTA Button - Desktop -->
-      <div class="hidden lg:block">
-        <button 
-          (click)="navigateToContact()"
-          class="btn-primary text-sm px-6 py-2">
-          Let's Talk
-        </button>
-      </div>
+      <!-- CTA & Mobile Menu -->
+      <div class="flex items-center gap-4">
+        <!-- Desktop CTA -->
+        <div class="hidden lg:block">
+          <a 
+            routerLink="/contact"
+            class="bg-black text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-gray-900 hover:shadow-lg hover:shadow-gray-500/25 transition-all duration-300 transform hover:scale-105">
+            Start Project
+          </a>
+        </div>
 
-      <!-- Mobile menu button -->
-      <div class="lg:hidden">
+        <!-- Mobile Menu Button -->
         <button 
           (click)="toggleMobileMenu()"
-          class="text-gray-600 hover:text-blue-600 transition-colors duration-300 p-2"
-          [attr.aria-expanded]="isMobileMenuOpen"
-          aria-label="Toggle navigation menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          class="lg:hidden w-10 h-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-50 transition-colors duration-200"
+          [attr.aria-expanded]="isMobileMenuOpen">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             @if (!isMobileMenuOpen) {
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             } @else {
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             }
           </svg>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Navigation -->
+    <!-- Mobile Navigation - Full Screen Modern -->
     @if (isMobileMenuOpen) {
-      <div class="lg:hidden mt-4 pb-4 animate-slide-down">
-        <div class="flex flex-col space-y-4">
-          @for (item of navItems; track item.name) {
+      <div class="lg:hidden fixed inset-0 top-20 bg-white z-40 animate-fade-in">
+        <div class="h-full flex flex-col">
+          <!-- Mobile Menu Items -->
+          <div class="flex-1 p-6 space-y-2">
+            @for (item of navItems; track item.name) {
+              <a 
+                [routerLink]="item.path"
+                (click)="closeMobileMenu()"
+                class="flex items-center gap-4 p-4 rounded-xl text-gray-600 hover:text-black hover:bg-gray-50 transition-all duration-200 text-lg font-medium group"
+                routerLinkActive="text-black bg-gray-100">
+                <span class="text-xl">{{ item.icon }}</span>
+                {{ item.name }}
+                <svg class="w-5 h-5 ml-auto text-gray-400 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            }
+          </div>
+
+          <!-- Mobile CTA Footer -->
+          <div class="p-6 border-t border-gray-100 bg-gray-50">
             <a 
-              [routerLink]="item.path"
+              routerLink="/contact"
               (click)="closeMobileMenu()"
-              class="nav-link text-lg py-2 px-4 rounded-lg hover:bg-gray-50 transition-all duration-300">
-              {{ item.name }}
+              class="w-full bg-black text-white py-4 rounded-xl font-semibold text-center block hover:bg-gray-900 hover:shadow-lg hover:shadow-gray-500/25 transition-all duration-300">
+              Start a Project
             </a>
-          }
-          <button 
-            (click)="navigateToContact()"
-            class="btn-primary mt-4">
-            Let's Talk
-          </button>
+            <div class="flex justify-center gap-6 mt-6 pt-6 border-t border-gray-200">
+              <a href="https://github.com/zahedhasan" class="text-gray-500 hover:text-black transition-colors">
+                <span class="sr-only">GitHub</span>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+              <a href="https://linkedin.com/in/zahedhasan" class="text-gray-500 hover:text-black transition-colors">
+                <span class="sr-only">LinkedIn</span>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="mailto:zahedhasan.cs@gmail.com" class="text-gray-500 hover:text-black transition-colors">
+                <span class="sr-only">Email</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     }
@@ -76,4 +108,4 @@
 </nav>
 
 <!-- Spacer for fixed navbar -->
-<div class="h-20 lg:h-24"></div>
+<div class="h-24 lg:h-28"></div>
