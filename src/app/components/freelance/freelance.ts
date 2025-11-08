@@ -9,15 +9,15 @@ import { RouterModule } from '@angular/router';
   templateUrl: './freelance.html'
 })
 export class Freelance implements AfterViewInit, OnDestroy {
-  private currentReviewIndex = 0;
   private currentVideoIndex = 0;
+  private currentTestimonialIndex = 0;
   private autoSlideInterval: any;
-  private totalReviews = 3;
-  private totalVideos = 3;
+  private totalVideos = 2;
+  private totalTestimonials = 2;
 
   ngAfterViewInit() {
-    this.initReviewCarousel();
     this.initVideoCarousel();
+    this.initTestimonialCarousel();
     this.startAutoSlide();
   }
 
@@ -27,55 +27,18 @@ export class Freelance implements AfterViewInit, OnDestroy {
     }
   }
 
-  private initReviewCarousel() {
-    this.updateReviewCarousel();
-  }
-
   private initVideoCarousel() {
     this.updateVideoCarousel();
   }
 
+  private initTestimonialCarousel() {
+    this.updateTestimonialCarousel();
+  }
+
   private startAutoSlide() {
     this.autoSlideInterval = setInterval(() => {
-      this.nextReview();
-    }, 4000); // Change every 4 seconds
-  }
-
-  // Review Carousel Methods
-  nextReview() {
-    this.currentReviewIndex = (this.currentReviewIndex + 1) % this.totalReviews;
-    this.updateReviewCarousel();
-  }
-
-  prevReview() {
-    this.currentReviewIndex = (this.currentReviewIndex - 1 + this.totalReviews) % this.totalReviews;
-    this.updateReviewCarousel();
-  }
-
-  goToReview(index: number) {
-    this.currentReviewIndex = index;
-    this.updateReviewCarousel();
-  }
-
-  private updateReviewCarousel() {
-    const carousel = document.getElementById('reviewCarousel');
-    const dots = document.querySelectorAll('.carousel-dot');
-    
-    if (carousel) {
-      const translateX = -this.currentReviewIndex * 100;
-      carousel.style.transform = `translateX(${translateX}%)`;
-    }
-    
-    // Update dots
-    dots.forEach((dot, index) => {
-      if (index === this.currentReviewIndex) {
-        dot.classList.add('bg-blue-600');
-        dot.classList.remove('bg-gray-300');
-      } else {
-        dot.classList.remove('bg-blue-600');
-        dot.classList.add('bg-gray-300');
-      }
-    });
+      this.nextVideo();
+    }, 6000); // Change every 6 seconds
   }
 
   // Video Carousel Methods
@@ -106,6 +69,43 @@ export class Freelance implements AfterViewInit, OnDestroy {
     // Update dots
     dots.forEach((dot, index) => {
       if (index === this.currentVideoIndex) {
+        dot.classList.add('bg-blue-600');
+        dot.classList.remove('bg-gray-300');
+      } else {
+        dot.classList.remove('bg-blue-600');
+        dot.classList.add('bg-gray-300');
+      }
+    });
+  }
+
+  // Testimonial Carousel Methods
+  nextTestimonial() {
+    this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.totalTestimonials;
+    this.updateTestimonialCarousel();
+  }
+
+  prevTestimonial() {
+    this.currentTestimonialIndex = (this.currentTestimonialIndex - 1 + this.totalTestimonials) % this.totalTestimonials;
+    this.updateTestimonialCarousel();
+  }
+
+  goToTestimonial(index: number) {
+    this.currentTestimonialIndex = index;
+    this.updateTestimonialCarousel();
+  }
+
+  private updateTestimonialCarousel() {
+    const carousel = document.getElementById('testimonialCarousel');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    
+    if (carousel) {
+      const translateX = -this.currentTestimonialIndex * 100;
+      carousel.style.transform = `translateX(${translateX}%)`;
+    }
+    
+    // Update dots
+    dots.forEach((dot, index) => {
+      if (index === this.currentTestimonialIndex) {
         dot.classList.add('bg-blue-600');
         dot.classList.remove('bg-gray-300');
       } else {
