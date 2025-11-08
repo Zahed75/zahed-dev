@@ -122,3 +122,8 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+
+.tech-pill {
+  @apply px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-lg border border-gray-200 font-medium transition-all duration-300 hover:bg-gray-200 hover:scale-105;
+}

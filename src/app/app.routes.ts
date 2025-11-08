@@ -7,7 +7,7 @@ import { Feedback } from './components/feedback/feedback';
 import { Freelance } from './components/freelance/freelance';
 import { Contact } from './components/contact/contact';
 import { NotFound } from './components/not-found/not-found';
-
+import { ProjectDetails } from './components/project-details/project-details'; // Add this import
 
 export const routes: Routes = [
   // Eagerly loaded routes (better for portfolio)
@@ -20,6 +20,11 @@ export const routes: Routes = [
     path: 'projects',
     component: Projects,
     title: 'Projects - Zahed Hasan'
+  },
+  {
+    path: 'projects/:id', // Add this route for project details
+    component: ProjectDetails,
+    title: 'Project Details - Zahed Hasan'
   },
   {
     path: 'portfolio',

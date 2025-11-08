@@ -42,23 +42,26 @@
   <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
       
-      <!-- ACI Logistics Project -->
-      <div class="group bg-white rounded-2xl border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
+      <!-- Project Cards - Dynamic -->
+      <div *ngFor="let project of projects" 
+           [routerLink]="['/projects', project.id]"
+           class="group bg-white rounded-2xl border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden cursor-pointer">
+        
         <!-- Project Header with Gradient -->
-        <div class="relative h-32 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 p-6">
+        <div class="relative h-32 bg-gradient-to-br p-6" [class]="project.gradient">
           <div class="absolute inset-0 bg-grid-white/[0.02] bg-[size:16px_16px]"></div>
           <div class="relative flex items-center gap-4">
             <div class="w-12 h-12 bg-white/20 rounded-xl backdrop-blur-sm border border-white/30 flex items-center justify-center">
-              <span class="text-white font-bold text-sm">ACI</span>
+              <span class="text-white font-bold text-sm">{{ project.title.substring(0,2) }}</span>
             </div>
             <div class="flex-1">
-              <h3 class="text-lg font-bold text-white leading-tight">Real-Time Audit Platform</h3>
-              <p class="text-blue-100 text-sm">ACI Logistics • 700+ Outlets</p>
+              <h3 class="text-lg font-bold text-white leading-tight">{{ project.title }}</h3>
+              <p class="text-opacity-90 text-sm" [class]="getTextColorClass(project.gradient)">{{ project.company }}</p>
             </div>
           </div>
           <div class="absolute top-4 right-4">
             <span class="bg-white/20 text-white px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-sm border border-white/30">
-              Enterprise
+              {{ project.type }}
             </span>
           </div>
         </div>
@@ -67,200 +70,42 @@
         <div class="p-6">
           <!-- Impact Metrics -->
           <div class="flex gap-4 mb-4">
-            <div class="flex items-center gap-1.5">
+            <div *ngFor="let metric of project.metrics" class="flex items-center gap-1.5">
               <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">99% Faster</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">Real-time</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">Offline</span>
+              <span class="text-xs font-medium text-gray-700">{{ metric }}</span>
             </div>
           </div>
 
           <!-- Description -->
           <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-            Cross-platform mobile & web suite digitizing audit processes for Bangladesh's largest retail chain with real-time GPS and offline capabilities.
+            {{ project.description }}
           </p>
 
           <!-- Tech Stack -->
           <div class="mb-4">
             <div class="flex flex-wrap gap-1.5">
-              <span class="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-lg border border-blue-200 font-medium">Flutter</span>
-              <span class="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-lg border border-blue-200 font-medium">Angular 19</span>
-              <span class="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-lg border border-blue-200 font-medium">Django REST</span>
-              <span class="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-lg border border-blue-200 font-medium">PostgreSQL</span>
+              <span *ngFor="let tech of project.tech" 
+                    class="px-2.5 py-1 text-xs rounded-lg border font-medium"
+                    [class]="getTechStackClass(project.gradient)">
+                {{ tech }}
+              </span>
             </div>
           </div>
 
-          <!-- Links -->
+          <!-- View Details Button -->
           <div class="flex gap-2 pt-4 border-t border-gray-100">
-            <a href="#" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200 transition-all duration-300 hover:bg-gray-200 hover:scale-105">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-              </svg>
-              GitHub
-            </a>
-            <a href="#" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200 transition-all duration-300 hover:bg-gray-200 hover:scale-105">
+            <div class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200 transition-all duration-300 group-hover:bg-gray-200 group-hover:scale-105">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
               </svg>
-              Live Demo
-            </a>
+              View Details
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Onnow Cloud Kitchen -->
-      <div class="group bg-white rounded-2xl border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
-        <!-- Project Header with Gradient -->
-        <div class="relative h-32 bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 p-6">
-          <div class="absolute inset-0 bg-grid-white/[0.02] bg-[size:16px_16px]"></div>
-          <div class="relative flex items-center gap-4">
-            <div class="w-12 h-12 bg-white/20 rounded-xl backdrop-blur-sm border border-white/30 flex items-center justify-center">
-              <span class="text-white font-bold text-sm">ON</span>
-            </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-bold text-white leading-tight">Cloud Kitchen Platform</h3>
-              <p class="text-purple-100 text-sm">Onnow • Multi-tenant SaaS</p>
-            </div>
-          </div>
-          <div class="absolute top-4 right-4">
-            <span class="bg-white/20 text-white px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-sm border border-white/30">
-              SaaS
-            </span>
-          </div>
-        </div>
-
-        <!-- Project Content -->
-        <div class="p-6">
-          <!-- Impact Metrics -->
-          <div class="flex gap-4 mb-4">
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">Revenue Growth</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">Multi-tenant</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">CI/CD</span>
-            </div>
-          </div>
-
-          <!-- Description -->
-          <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-            Comprehensive cloud kitchen solution with automated analytics, multi-tenant architecture, and payment integrations for restaurant chains.
-          </p>
-
-          <!-- Tech Stack -->
-          <div class="mb-4">
-            <div class="flex flex-wrap gap-1.5">
-              <span class="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs rounded-lg border border-purple-200 font-medium">Express.js</span>
-              <span class="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs rounded-lg border border-purple-200 font-medium">MongoDB</span>
-              <span class="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs rounded-lg border border-purple-200 font-medium">Docker</span>
-              <span class="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs rounded-lg border border-purple-200 font-medium">Redis</span>
-            </div>
-          </div>
-
-          <!-- Links -->
-          <div class="flex gap-2 pt-4 border-t border-gray-100">
-            <a href="#" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200 transition-all duration-300 hover:bg-gray-200 hover:scale-105">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-              API Docs
-            </a>
-            <a href="#" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200 transition-all duration-300 hover:bg-gray-200 hover:scale-105">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-              Infrastructure
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- VCom Platform -->
-      <div class="group bg-white rounded-2xl border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
-        <!-- Project Header with Gradient -->
-        <div class="relative h-32 bg-gradient-to-br from-green-500 via-green-600 to-green-700 p-6">
-          <div class="absolute inset-0 bg-grid-white/[0.02] bg-[size:16px_16px]"></div>
-          <div class="relative flex items-center gap-4">
-            <div class="w-12 h-12 bg-white/20 rounded-xl backdrop-blur-sm border border-white/30 flex items-center justify-center">
-              <span class="text-white font-bold text-sm">VC</span>
-            </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-bold text-white leading-tight">VCom E-commerce</h3>
-              <p class="text-green-100 text-sm">Best Electronics • Cost Optimization</p>
-            </div>
-          </div>
-          <div class="absolute top-4 right-4">
-            <span class="bg-white/20 text-white px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-sm border border-white/30">
-              E-commerce
-            </span>
-          </div>
-        </div>
-
-        <!-- Project Content -->
-        <div class="p-6">
-          <!-- Impact Metrics -->
-          <div class="flex gap-4 mb-4">
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">30% Saved</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">Automated</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-xs font-medium text-gray-700">Secure</span>
-            </div>
-          </div>
-
-          <!-- Description -->
-          <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-            Scalable e-commerce platform with secure payment integration, migrating manual systems to automated order & delivery processes.
-          </p>
-
-          <!-- Tech Stack -->
-          <div class="mb-4">
-            <div class="flex flex-wrap gap-1.5">
-              <span class="px-2.5 py-1 bg-green-50 text-green-700 text-xs rounded-lg border border-green-200 font-medium">Django REST</span>
-              <span class="px-2.5 py-1 bg-green-50 text-green-700 text-xs rounded-lg border border-green-200 font-medium">PostgreSQL</span>
-              <span class="px-2.5 py-1 bg-green-50 text-green-700 text-xs rounded-lg border border-green-200 font-medium">Angular</span>
-              <span class="px-2.5 py-1 bg-green-50 text-green-700 text-xs rounded-lg border border-green-200 font-medium">Docker</span>
-            </div>
-          </div>
-
-          <!-- Links -->
-          <div class="flex gap-2 pt-4 border-t border-gray-100">
-            <a href="#" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200 transition-all duration-300 hover:bg-gray-200 hover:scale-105">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-              </svg>
-              Beta UI
-            </a>
-            <a href="#" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200 transition-all duration-300 hover:bg-gray-200 hover:scale-105">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-              API Docs
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Additional Project Cards can be added here -->
+      <!-- Additional Project Card -->
       <div class="group bg-white rounded-2xl border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
         <div class="relative h-32 bg-gradient-to-br from-gray-500 via-gray-600 to-gray-700 p-6">
           <div class="absolute inset-0 bg-grid-white/[0.02] bg-[size:16px_16px]"></div>
