@@ -1,0 +1,19 @@
+/* Custom styles for enhanced visual appeal */
+.file-upload:hover {
+    border-color: #3b82f6;
+    background-color: #f8fafc;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition-property: color, background-color, border-color, transform;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom focus states */
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #3b82f6;
+}
