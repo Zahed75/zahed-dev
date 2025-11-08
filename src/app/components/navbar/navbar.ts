@@ -31,7 +31,7 @@ export class NavbarComponent {
     { name: 'Me', path: '/about-me', icon: 'work' },
     { name: 'Case Studies', path: '/case-study', icon: 'analytics' },
     { name: 'Freelance', path: '/freelance', icon: 'business_center' },
-    { name: 'Feedback', path: '/feedback', icon: 'reviews' },
+    { name: 'Blogs', path: '/blog', icon: 'book' },
     { name: 'Contact', path: '/contact', icon: 'mail' }
   ];
 

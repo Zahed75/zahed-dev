@@ -2,13 +2,15 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home';
 import { Projects } from './components/projects/projects';
 import { CaseStudy } from './components/case-study/case-study';
-import { Feedback } from './components/feedback/feedback';
+
 import { Freelance } from './components/freelance/freelance';
 import { Contact } from './components/contact/contact';
 import { NotFound } from './components/not-found/not-found';
 import { ProjectDetails } from './components/project-details/project-details';
 import { AboutMe } from './components/about-me/about-me';
 import { CaseStudyDetails } from './components/case-study-details/case-study-details';
+import { Blog } from './components/blog/blog';
+import { BlogDetails } from './components/blog-details/blog-details';
 
 export const routes: Routes = [
   {
@@ -42,9 +44,14 @@ export const routes: Routes = [
     title: 'About Me - Zahed Hasan'
   },
   {
-    path: 'feedback',
-    component: Feedback,
+    path: 'blog',
+    component: Blog,
     title: 'Client Feedback - Zahed Hasan'
+  },
+  {
+    path: 'blog/:id',
+    component: BlogDetails,
+    title: 'Client Feedback Details - Zahed Hasan'
   },
   {
     path: 'freelance',
