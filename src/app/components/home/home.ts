@@ -15,11 +15,7 @@ interface Experience {
   period: string;
   highlights: string[];
   tech: string[];
-}
-
-interface TechStat {
-  value: string;
-  label: string;
+  companyLogo: string;
 }
 
 @Component({
@@ -30,6 +26,7 @@ interface TechStat {
 })
 export class HomeComponent {
   profileImageLoaded: boolean = false;
+  logoErrors: Set<number> = new Set();
 
   // Services Data
   services: Service[] = [
@@ -96,8 +93,6 @@ export class HomeComponent {
     'Odoo', 'AI', 'GraphQL', 'Serverless'
   ];
 
-
-
   experiences: Experience[] = [
     {
       company: 'ACI Logistics Ltd.',
@@ -108,9 +103,9 @@ export class HomeComponent {
         'Implemented real-time logistics management',
         'Achieved 99% reduction in audit processing time'
       ],
-      tech: ['Flutter', 'Angular', 'Django REST', 'PostgreSQL']
+      tech: ['Flutter', 'Angular', 'Django REST', 'PostgreSQL'],
+      companyLogo: 'assets/logo/aci.png'
     },
-
     {
       company: 'Best Electronics Ltd.',
       role: 'Deputy Manager (Software Engineer)',
@@ -120,7 +115,8 @@ export class HomeComponent {
         'Optimized operational costs by 30%',
         'Automated order & delivery systems'
       ],
-      tech: ['Django REST', 'Express.js', 'PostgreSQL', 'Docker']
+      tech: ['Django REST', 'Express.js', 'PostgreSQL', 'Docker'],
+      companyLogo: 'assets/logo/BEL.png'
     },
     {
       company: 'Syesomatic Technologies',
@@ -131,11 +127,52 @@ export class HomeComponent {
         'Architected AWS cloud infrastructure',
         'Implemented Kubernetes for scalability'
       ],
-      tech: ['AWS', 'Kubernetes', 'Node.js', 'Docker']
+      tech: ['AWS', 'Kubernetes', 'Node.js', 'Docker'],
+      companyLogo: 'assets/brands/sysco.png'
     }
   ];
 
-  onProfileImageLoad() {
+  // Method to get company logo background color
+  getCompanyLogoClass(index: number): string {
+    const colors = [
+      'bg-gradient-to-br from-red-500 to-red-600',
+      'bg-gradient-to-br from-white-700 to-orange-500', 
+      'bg-gradient-to-br from-white-500 to-white-600'
+    ];
+    return colors[index % colors.length];
+  }
+
+  // Method to get period dot color
+  getPeriodDotClass(index: number): string {
+    const colors = [
+      'bg-red-600',
+      'bg-orange-500',
+      'bg-blue-500'
+    ];
+    return colors[index % colors.length];
+  }
+
+  // Handle logo loading errors
+  onLogoError(index: number): void {
+    this.logoErrors.add(index);
+  }
+
+  // Check if logo has error
+  isLogoError(index: number): boolean {
+    return this.logoErrors.has(index);
+  }
+
+  // Get company initials for fallback
+  getCompanyInitials(company: string): string {
+    return company
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  }
+
+  onProfileImageLoad(): void {
     this.profileImageLoaded = true;
   }
 }

@@ -9,10 +9,10 @@
           <div class="relative group">
             <div class="w-64 h-64 lg:w-80 lg:h-80 bg-gray-200 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
               <img 
-                src="./assets/project/zahed-dp.jpg" 
+                src="assets/project/zahed-dp.jpg" 
                 alt="Zahed Hasan - Full Stack Developer"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                onerror="this.style.display='none'">
+                (load)="onProfileImageLoad()">
               <div *ngIf="!profileImageLoaded" class="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
                 <span class="text-4xl font-bold text-white">ZH</span>
               </div>
@@ -70,11 +70,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
               </svg>
             </button>
-            <button 
-              routerLink="/contact"
-              class="btn-outline px-6 py-3 text-lg">
-              Contact Me
-            </button>
+            <a 
+              href="https://calendly.com/zahed-hasan-rabbi/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-outline px-6 py-3 text-lg flex items-center justify-center gap-2">
+              <span>Get Free Consultation</span>
+            </a>
           </div>
         </div>
       </div>
@@ -124,6 +126,77 @@
           
           <!-- Hover Effect Line -->
           <div class="absolute bottom-0 left-0 w-0 h-1 bg-black group-hover:w-full transition-all duration-500 delay-200"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+   <!-- Experience Highlights -->
+  <section class="py-20 bg-white">
+    <div class="section-container">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          Professional Journey
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Building scalable solutions for industry leaders and transforming business operations
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let exp of experiences; let i = index" 
+             class="group relative bg-white rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 overflow-hidden">
+          
+          <!-- Background Gradient Effect -->
+          <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+          
+          <!-- Company Header with Colored Logo -->
+          <div class="flex items-center gap-4 mb-6">
+            <div [class]="getCompanyLogoClass(i)" 
+                 class="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 shadow-sm border border-white overflow-hidden">
+              <!-- Company Logo -->
+              <img 
+                *ngIf="!isLogoError(i)"
+                [src]="exp.companyLogo" 
+                [alt]="exp.company + ' logo'"
+                class="w-8 h-8 object-contain"
+                (error)="onLogoError(i)">
+              <!-- Fallback with colored text -->
+              <div *ngIf="isLogoError(i)" class="text-white font-bold text-sm">
+                {{ getCompanyInitials(exp.company) }}
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-gray-900 text-lg truncate">{{ exp.company }}</h3>
+              <p class="text-gray-600 text-sm">{{ exp.role }}</p>
+            </div>
+          </div>
+          
+          <!-- Period Badge -->
+          <div class="inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-medium mb-4 group-hover:bg-gray-200 transition-colors duration-300">
+            <span [class]="getPeriodDotClass(i)" class="w-1.5 h-1.5 rounded-full animate-pulse"></span>
+            {{ exp.period }}
+          </div>
+          
+          <!-- Highlights -->
+          <ul class="space-y-3 mb-6">
+            <li *ngFor="let highlight of exp.highlights" 
+                class="flex items-start gap-3 text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="leading-relaxed">{{ highlight }}</span>
+            </li>
+          </ul>
+          
+          <!-- Technologies -->
+          <div class="flex flex-wrap gap-1.5 pt-5 border-t border-gray-200 group-hover:border-gray-300 transition-colors duration-300">
+            <span *ngFor="let tech of exp.tech" 
+                  class="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200 hover:bg-gray-200 hover:border-gray-300 transition-all duration-200 cursor-default">
+              {{ tech }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -240,69 +313,12 @@
               </span>
             </div>
           </div>
-
-        </div>
-      </div>
-
-     
-    </div>
-  </section>
-
-  <!-- Experience Highlights -->
-  <section class="py-20 bg-white">
-    <div class="section-container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-          Professional Experience
-        </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Building scalable solutions for industry leaders and transforming business operations
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div *ngFor="let exp of experiences" 
-             class="group bg-white rounded-2xl p-8 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-          
-          <!-- Company Header -->
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
-              <span class="text-gray-900 font-bold text-sm">{{ exp.company.substring(0,2) }}</span>
-            </div>
-            <div>
-              <h3 class="font-bold text-gray-900 text-lg">{{ exp.company }}</h3>
-              <p class="text-gray-600 text-sm">{{ exp.role }}</p>
-            </div>
-          </div>
-          
-          <!-- Period -->
-          <div class="inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-medium mb-4">
-            <span class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-            {{ exp.period }}
-          </div>
-          
-          <!-- Highlights -->
-          <ul class="space-y-3 mb-6">
-            <li *ngFor="let highlight of exp.highlights" 
-                class="flex items-start gap-3 text-sm text-gray-600">
-              <svg class="w-4 h-4 text-black mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              <span>{{ highlight }}</span>
-            </li>
-          </ul>
-          
-          <!-- Technologies -->
-          <div class="flex flex-wrap gap-2 pt-6 border-t border-gray-200">
-            <span *ngFor="let tech of exp.tech" 
-                  class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200">
-              {{ tech }}
-            </span>
-          </div>
         </div>
       </div>
     </div>
   </section>
+
+ 
 
   <!-- CTA Section -->
   <section class="py-20 bg-black text-white">
@@ -314,15 +330,23 @@
         Let's collaborate to build scalable, efficient, and innovative digital solutions
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button 
-          routerLink="/contact"
-          class="bg-white text-black px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
-          Start a Project
-        </button>
+        <a 
+          href="https://calendly.com/zahed-hasan-rabbi/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white text-black px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          Book Free Consultation
+        </a>
         <button 
           routerLink="/projects"
-          class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300">
-          View Case Studies
+          class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+          </svg>
+          View My Projects
         </button>
       </div>
     </div>
