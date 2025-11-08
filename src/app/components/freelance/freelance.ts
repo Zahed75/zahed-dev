@@ -38,7 +38,7 @@ export class Freelance implements AfterViewInit, OnDestroy {
   private startAutoSlide() {
     this.autoSlideInterval = setInterval(() => {
       this.nextReview();
-    }, 5000); // Change every 5 seconds
+    }, 4000); // Change every 4 seconds
   }
 
   // Review Carousel Methods
@@ -69,11 +69,9 @@ export class Freelance implements AfterViewInit, OnDestroy {
     // Update dots
     dots.forEach((dot, index) => {
       if (index === this.currentReviewIndex) {
-        dot.classList.add('active');
-        dot.classList.remove('bg-gray-300');
         dot.classList.add('bg-blue-600');
+        dot.classList.remove('bg-gray-300');
       } else {
-        dot.classList.remove('active');
         dot.classList.remove('bg-blue-600');
         dot.classList.add('bg-gray-300');
       }
@@ -97,27 +95,22 @@ export class Freelance implements AfterViewInit, OnDestroy {
   }
 
   private updateVideoCarousel() {
-    const videoScroll = document.getElementById('videoScroll');
-    const indicators = document.querySelectorAll('.video-indicator');
+    const carousel = document.getElementById('videoCarousel');
+    const dots = document.querySelectorAll('.video-dot');
     
-    if (videoScroll) {
-      const scrollPosition = this.currentVideoIndex * 320; // 320px per card (80px width + 24px gap)
-      videoScroll.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-      });
+    if (carousel) {
+      const translateX = -this.currentVideoIndex * 100;
+      carousel.style.transform = `translateX(${translateX}%)`;
     }
     
-    // Update indicators
-    indicators.forEach((indicator, index) => {
+    // Update dots
+    dots.forEach((dot, index) => {
       if (index === this.currentVideoIndex) {
-        indicator.classList.add('active');
-        indicator.classList.remove('bg-gray-300');
-        indicator.classList.add('bg-blue-600');
+        dot.classList.add('bg-blue-600');
+        dot.classList.remove('bg-gray-300');
       } else {
-        indicator.classList.remove('active');
-        indicator.classList.remove('bg-blue-600');
-        indicator.classList.add('bg-gray-300');
+        dot.classList.remove('bg-blue-600');
+        dot.classList.add('bg-gray-300');
       }
     });
   }
