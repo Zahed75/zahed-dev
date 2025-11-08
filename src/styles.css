@@ -127,3 +127,20 @@ html {
 .tech-pill {
   @apply px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-lg border border-gray-200 font-medium transition-all duration-300 hover:bg-gray-200 hover:scale-105;
 }
+
+
+.prose {
+  @apply text-gray-600 leading-relaxed;
+}
+
+.prose p {
+  @apply mb-4;
+}
+
+.prose ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.prose li {
+  @apply mb-2;
+}

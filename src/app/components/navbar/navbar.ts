@@ -28,8 +28,10 @@ export class NavbarComponent {
   navItems: NavItem[] = [
     { name: 'Home', path: '/', icon: 'home' },
     { name: 'Projects', path: '/projects', icon: 'code' },
-    { name: 'Experience', path: '/portfolio', icon: 'work' },
+    { name: 'Me', path: '/about-me', icon: 'work' },
     { name: 'Case Studies', path: '/case-study', icon: 'analytics' },
+    { name: 'Freelance', path: '/freelance', icon: 'business_center' },
+    { name: 'Feedback', path: '/feedback', icon: 'reviews' },
     { name: 'Contact', path: '/contact', icon: 'mail' }
   ];
 
