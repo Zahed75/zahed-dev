@@ -1,1 +1,184 @@
-<p>blog works!</p>
+<main class="min-h-screen bg-gray-50 py-8">
+  <!-- Blog Header -->
+  <section class="bg-white py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          Tech Insights & Tutorials
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          Exploring the latest in web development, cloud technologies, and software architecture. 
+          Practical guides and deep dives into modern tech stacks.
+        </p>
+        
+        <!-- Categories -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium transition-all hover:bg-blue-700">
+            All Posts
+          </button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium transition-all hover:bg-gray-300">
+            Angular
+          </button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium transition-all hover:bg-gray-300">
+            Node.js
+          </button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium transition-all hover:bg-gray-300">
+            AWS
+          </button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium transition-all hover:bg-gray-300">
+            DevOps
+          </button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium transition-all hover:bg-gray-300">
+            Mobile
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Post -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-12" *ngIf="featuredPost">
+    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Featured Image -->
+        <div class="aspect-video lg:aspect-auto">
+          <img 
+            [src]="featuredPost.image" 
+            [alt]="featuredPost.title"
+            class="w-full h-full object-cover"
+          >
+        </div>
+        
+        <!-- Featured Content -->
+        <div class="p-8 flex flex-col justify-center">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+              Featured
+            </span>
+            <span 
+              *ngFor="let cat of featuredPost.category" 
+              class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+              {{ cat }}
+            </span>
+          </div>
+          
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            {{ featuredPost.title }}
+          </h2>
+          
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            {{ featuredPost.excerpt }}
+          </p>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img 
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
+                alt="Zahed Hasan"
+                class="w-10 h-10 rounded-full"
+              >
+              <div>
+                <p class="font-medium text-gray-900">{{ featuredPost.author }}</p>
+                <p class="text-sm text-gray-500">Full Stack Developer</p>
+              </div>
+            </div>
+            
+            <div class="text-right">
+              <p class="text-sm text-gray-500">{{ featuredPost.date }}</p>
+              <p class="text-sm text-gray-500">{{ featuredPost.readTime }}</p>
+            </div>
+          </div>
+          
+          <a 
+            [routerLink]="['/blog', featuredPost.id]"
+            class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold transition-all hover:bg-blue-700 hover:scale-105">
+            Read Full Article
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts Grid -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Blog Post Cards -->
+      <article 
+        *ngFor="let post of regularPosts"
+        class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 group">
+        
+        <a [routerLink]="['/blog', post.id]" class="block">
+          <div class="aspect-video overflow-hidden">
+            <img 
+              [src]="post.image" 
+              [alt]="post.title"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            >
+          </div>
+        </a>
+        
+        <div class="p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span 
+              *ngFor="let cat of post.category" 
+              class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">
+              {{ cat }}
+            </span>
+          </div>
+          
+          <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+            <a [routerLink]="['/blog', post.id]" class="hover:text-blue-600">
+              {{ post.title }}
+            </a>
+          </h3>
+          
+          <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+            {{ post.excerpt }}
+          </p>
+          
+          <div class="flex items-center justify-between text-sm text-gray-500">
+            <div class="flex items-center gap-2">
+              <img 
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" 
+                alt="Zahed Hasan"
+                class="w-6 h-6 rounded-full"
+              >
+              <span>{{ post.author }}</span>
+            </div>
+            <span>{{ post.date }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-12">
+      <button class="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold transition-all hover:border-gray-400 hover:bg-gray-50">
+        Load More Articles
+      </button>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white">
+      <h2 class="text-2xl font-bold mb-4">Stay Updated with Tech Insights</h2>
+      <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+        Get the latest articles on web development, cloud technologies, and software architecture delivered to your inbox.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+        <input 
+          type="email" 
+          placeholder="Enter your email"
+          class="px-4 py-3 rounded-lg text-gray-900 flex-1"
+        >
+        <button class="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold transition-all hover:bg-gray-100">
+          Subscribe
+        </button>
+      </div>
+    </div>
+  </section>
+</main>

@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home';
 import { Projects } from './components/projects/projects';
 import { CaseStudy } from './components/case-study/case-study';
-
 import { Freelance } from './components/freelance/freelance';
 import { Contact } from './components/contact/contact';
 import { NotFound } from './components/not-found/not-found';
@@ -34,7 +33,7 @@ export const routes: Routes = [
     title: 'Case Studies - Zahed Hasan'
   },
   { 
-    path: 'case-study/:id', // Fixed route path
+    path: 'case-study/:id',
     component: CaseStudyDetails,
     title: 'Case Study Details - Zahed Hasan'
   },
@@ -46,12 +45,12 @@ export const routes: Routes = [
   {
     path: 'blog',
     component: Blog,
-    title: 'Client Feedback - Zahed Hasan'
+    title: 'Tech Blog - Zahed Hasan'
   },
   {
     path: 'blog/:id',
     component: BlogDetails,
-    title: 'Client Feedback Details - Zahed Hasan'
+    title: 'Blog Details - Zahed Hasan'
   },
   {
     path: 'freelance',
