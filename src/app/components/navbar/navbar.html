@@ -1,115 +1,77 @@
-<!-- Modern Professional Navbar with Material Icons -->
-<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-     [class]="isScrolled ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-gray-100 py-3' : 'bg-transparent py-6'">
+<header 
+  class="fixed w-full top-0 z-50 transition-all duration-300 backdrop-blur-md"
+  [class.bg-white/90]="isScrolled || isMenuOpen"
+  [class.bg-transparent]="!isScrolled && !isMenuOpen"
+  [class.border-b]="isScrolled || isMenuOpen"
+  [class.border-neutral-200/50]="isScrolled || isMenuOpen"
+  [class.border-transparent]="!isScrolled && !isMenuOpen"
+  [class.shadow-sm]="isScrolled">
   
-  <div class="section-container">
-    <div class="flex items-center justify-between">
+  <div class="container-xl">
+    <div class="flex items-center justify-between h-20 lg:h-24">
       
-      <!-- Logo - Professional -->
-      <a routerLink="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-gray-500/25 transition-all duration-300">
-          <span class="text-white font-bold text-sm">ZH</span>
-        </div>
-        <div class="hidden sm:block">
-          <div class="text-lg font-semibold text-gray-900">Zahed Hasan</div>
-          <div class="text-xs text-gray-500 font-medium">Full-Stack Engineer</div>
-        </div>
+      <!-- Logo -->
+      <a routerLink="/" class="flex flex-col relative z-50 group" (click)="closeMenu()">
+        <span class="text-xl lg:text-2xl font-black tracking-tighter uppercase leading-none group-hover:opacity-60 transition-opacity">Zahed Hasan</span>
+        <span class="text-[0.65rem] font-bold tracking-[0.2em] text-neutral-400 uppercase mt-1">Engineering Manager</span>
       </a>
 
-      <!-- Desktop Navigation - Material Icons -->
-      <div class="hidden lg:flex items-center space-x-1">
-        @for (item of navItems; track item.name) {
-          <a 
-            [routerLink]="item.path"
-            class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:text-black hover:bg-gray-50 transition-all duration-200 font-medium text-sm group"
-            routerLinkActive="text-black bg-gray-100"
-            [routerLinkActiveOptions]="{exact: true}">
-            <!-- Material Icon -->
-            <mat-icon class="!w-5 !h-5 !text-current group-hover:scale-110 transition-transform duration-200" aria-hidden="false" [attr.aria-label]="item.name + ' icon'">
-              {{ item.icon }}
-            </mat-icon>
-            {{ item.name }}
-          </a>
-        }
-      </div>
-
-      <!-- CTA & Mobile Menu -->
-      <div class="flex items-center gap-4">
-        <!-- CTA Button - Visible on ALL devices with Calendly Link -->
-        <a 
-          href="https://calendly.com/zahed-hasan-rabbi/30min"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="bg-black text-white px-4 py-2.5 rounded-lg font-semibold text-sm hover:bg-gray-900 hover:shadow-lg hover:shadow-gray-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 whitespace-nowrap">
-          <mat-icon class="!w-4 !h-4 !text-current" aria-hidden="false" aria-label="Book meeting icon">event_available</mat-icon>
-          <span class="hidden sm:inline">Free Consultation</span>
-          <span class="sm:hidden">Consult</span>
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8">
+        <a routerLink="/about-me" routerLinkActive="nav-link-active" class="text-sm font-medium text-neutral-500 hover:text-black transition-colors">Strategy</a>
+        <a routerLink="/projects" routerLinkActive="nav-link-active" class="text-sm font-medium text-neutral-500 hover:text-black transition-colors">Portfolio</a>
+        <a routerLink="/blog" routerLinkActive="nav-link-active" class="text-sm font-medium text-neutral-500 hover:text-black transition-colors">Blogs</a>
+        <a routerLink="/contact" routerLinkActive="nav-link-active" class="text-sm font-medium text-neutral-500 hover:text-black transition-colors">Contact</a>
+        
+        <div class="w-px h-4 bg-neutral-200 mx-2"></div>
+        
+        <a *ngIf="resumeUrl" [href]="resumeUrl" target="_blank" class="text-sm font-bold text-neutral-400 hover:text-black transition-colors flex items-center gap-1.5">
+          Resume <mat-icon class="!text-[14px] !w-[14px] !h-[14px]">download</mat-icon>
         </a>
+        <a routerLink="/contact" class="btn-primary !px-5 !py-2.5 !font-bold !text-xs !tracking-wider !uppercase">
+          Schedule Call
+        </a>
+      </nav>
 
-        <!-- Mobile Menu Button - Hidden on desktop -->
-        <button 
-          (click)="toggleMobileMenu()"
-          class="lg:hidden w-10 h-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-50 transition-colors duration-200"
-          [attr.aria-expanded]="isMobileMenuOpen">
-          <mat-icon class="!w-5 !h-5 !text-current" aria-hidden="false" aria-label="Menu icon">
-            {{ isMobileMenuOpen ? 'close' : 'menu' }}
-          </mat-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Navigation - Material Icons -->
-    @if (isMobileMenuOpen) {
-      <div class="lg:hidden fixed inset-0 top-20 bg-white z-40 animate-fade-in overflow-y-auto">
-        <div class="min-h-full flex flex-col">
-          <!-- Mobile Menu Items -->
-          <div class="flex-1 p-4 space-y-2">
-            @for (item of navItems; track item.name) {
-              <a 
-                [routerLink]="item.path"
-                (click)="closeMobileMenu()"
-                class="flex items-center gap-4 p-4 rounded-xl text-gray-600 hover:text-black hover:bg-gray-50 transition-all duration-200 text-lg font-medium group"
-                routerLinkActive="text-black bg-gray-100">
-                <!-- Material Icon -->
-                <mat-icon class="!w-6 !h-6 !text-current group-hover:scale-110 transition-transform duration-200" aria-hidden="false" [attr.aria-label]="item.name + ' icon'">
-                  {{ item.icon }}
-                </mat-icon>
-                {{ item.name }}
-                <mat-icon class="!w-5 !h-5 !text-gray-400 group-hover:!text-gray-600 ml-auto" aria-hidden="false" aria-label="Navigate icon">
-                  chevron_right
-                </mat-icon>
-              </a>
-            }
-          </div>
-
-          <!-- Mobile CTA Footer -->
-          <div class="p-4 border-t border-gray-100 bg-gray-50 mt-auto">
-            <a 
-              href="https://calendly.com/zahed-hasan-rabbi/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              (click)="closeMobileMenu()"
-              class="w-full bg-black text-white py-4 rounded-xl font-semibold text-center block hover:bg-gray-900 hover:shadow-lg hover:shadow-gray-500/25 transition-all duration-300 flex items-center justify-center gap-2">
-              <mat-icon class="!w-5 !h-5 !text-current" aria-hidden="false" aria-label="Book meeting icon">event_available</mat-icon>
-              Book Free Consultation
-            </a>
-            <div class="flex justify-center gap-6 mt-4 pt-4 border-t border-gray-200">
-              <a href="https://github.com/zahedhasan" class="text-gray-500 hover:text-black transition-colors" aria-label="GitHub">
-                <mat-icon class="!w-6 !h-6 !text-current" aria-hidden="false">code</mat-icon>
-              </a>
-              <a href="https://linkedin.com/in/zahedhasan" class="text-gray-500 hover:text-black transition-colors" aria-label="LinkedIn">
-                <mat-icon class="!w-6 !h-6 !text-current" aria-hidden="false">person</mat-icon>
-              </a>
-              <a href="mailto:zahedhasan.cs@gmail.com" class="text-gray-500 hover:text-black transition-colors" aria-label="Email">
-                <mat-icon class="!w-6 !h-6 !text-current" aria-hidden="false">email</mat-icon>
-              </a>
-            </div>
-          </div>
+      <!-- Mobile Menu Button -->
+      <button 
+        class="lg:hidden p-2 -mr-2 text-black hover:opacity-60 transition-opacity relative z-50 focus:outline-none"
+        (click)="toggleMenu()"
+        aria-label="Toggle menu">
+        <div class="w-6 h-5 relative flex flex-col justify-between transform transition-all duration-300">
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300" [class.rotate-45]="isMenuOpen" [class.translate-y-2]="isMenuOpen"></span>
+          <span class="w-full h-0.5 bg-current transition-all duration-300" [class.opacity-0]="isMenuOpen"></span>
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300" [class.-rotate-45]="isMenuOpen" [class.-translate-y-2.5]="isMenuOpen"></span>
         </div>
-      </div>
-    }
-  </div>
-</nav>
+      </button>
 
-<!-- Spacer for fixed navbar -->
-<div class="h-24 lg:h-28"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div 
+    class="fixed inset-0 bg-white/95 backdrop-blur-xl z-40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden flex flex-col pt-24 pb-10 px-6 overflow-y-auto"
+    [class.opacity-100]="isMenuOpen"
+    [class.pointer-events-auto]="isMenuOpen"
+    [class.opacity-0]="!isMenuOpen"
+    [class.pointer-events-none]="!isMenuOpen">
+    
+    <nav class="flex flex-col gap-6 sm:gap-8 text-xl sm:text-3xl font-black uppercase tracking-tighter mt-4 transition-all duration-700 delay-100" [class.translate-y-0]="isMenuOpen" [class.translate-y-10]="!isMenuOpen" [class.opacity-100]="isMenuOpen" [class.opacity-0]="!isMenuOpen">
+      <a routerLink="/" (click)="closeMenu()" class="hover:text-neutral-500 transition-colors py-2 border-b border-gray-100 inline-block">Home</a>
+      <a routerLink="/about-me" (click)="closeMenu()" class="hover:text-neutral-500 transition-colors py-2 border-b border-gray-100 inline-block">Strategy</a>
+      <a routerLink="/projects" (click)="closeMenu()" class="hover:text-neutral-500 transition-colors py-2 border-b border-gray-100 inline-block">Portfolio</a>
+      <a routerLink="/blog" (click)="closeMenu()" class="hover:text-neutral-500 transition-colors py-2 border-b border-gray-100 inline-block">Blogs</a>
+      <a routerLink="/contact" (click)="closeMenu()" class="hover:text-neutral-500 transition-colors py-2 border-b border-gray-100 inline-block">Contact</a>
+    </nav>
+
+    <div class="mt-auto transition-all duration-700 delay-200" [class.translate-y-0]="isMenuOpen" [class.translate-y-10]="!isMenuOpen" [class.opacity-100]="isMenuOpen" [class.opacity-0]="!isMenuOpen">
+      <div class="divider mb-6"></div>
+      <a *ngIf="resumeUrl" [href]="resumeUrl" target="_blank" (click)="closeMenu()" class="text-sm font-bold text-neutral-400 hover:text-black transition-colors flex items-center gap-2 mb-6">
+        Download Resume <mat-icon class="!text-[14px] !w-[14px] !h-[14px]">download</mat-icon>
+      </a>
+      <a routerLink="/contact" (click)="closeMenu()" class="btn-primary w-full shadow-lg">
+        Schedule Advisory Call
+      </a>
+    </div>
+  </div>
+</header>

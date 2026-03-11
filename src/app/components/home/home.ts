@@ -1,178 +1,154 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { ApiService } from '../../services/api';
 
-interface Service {
+interface FeaturedProject {
+  id: number;
   title: string;
+  industry: string;
+  myRole: string;
   description: string;
-  icon: string;
   tech: string[];
+  slug: string;
+  image: string;
+}
+
+interface Testimonial {
+  id: number;
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  rating: number;
+}
+
+interface BlogPreview {
+  id: number;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readTime: string;
+  slug: string;
+  tags: string[];
+}
+
+interface FAQ {
+  id: number;
+  question: string;
+  answer: string;
+  open: boolean;
 }
 
 interface Experience {
+  id: number;
   company: string;
   role: string;
   period: string;
+  isCurrent: boolean;
   highlights: string[];
   tech: string[];
-  companyLogo: string;
+  companyUrl: string;
 }
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './home.html'
 })
-export class HomeComponent {
-  profileImageLoaded: boolean = false;
-  logoErrors: Set<number> = new Set();
+export class HomeComponent implements OnInit {
+  calendlyUrl = 'https://calendly.com/zahed-hasan-rabbi/30min';
 
-  // Services Data
-  services: Service[] = [
-    {
-      title: 'Enterprise Software Solution',
-      description: 'Scalable web applications using Angular with robust backend APIs and microservices architecture.',
-      icon: '⚡',
-      tech: ['Angular', 'Node.js', 'Django', 'PostgreSQL']
-    },
-    {
-      title: 'Mobile App Development',
-      description: 'Cross-platform mobile applications with Flutter, featuring offline capabilities and real-time sync.',
-      icon: '📱',
-      tech: ['Flutter', 'Dart', 'Firebase', 'REST APIs']
-    },
-    {
-      title: 'Backend & API Development',
-      description: 'High-performance RESTful APIs and microservices with proper authentication and documentation.',
-      icon: '🔧',
-      tech: ['Django REST', 'Express.js', 'PostgreSQL', 'MongoDB']
-    },
-    {
-      title: 'Cloud Infrastructure',
-      description: 'AWS cloud solutions with Docker containerization, CI/CD pipelines, and auto-scaling.',
-      icon: '☁️',
-      tech: ['AWS', 'Docker', 'Kubernetes', 'CI/CD']
-    },
-    {
-      title: 'E-commerce Solutions',
-      description: 'Complete e-commerce platforms with payment integration, inventory management, and analytics.',
-      icon: '🛒',
-      tech: ['Django', 'React', 'PostgreSQL', 'Payment APIs']
-    },
-    {
-      title: 'Digital Transformation',
-      description: 'Modernizing legacy systems and implementing automation for improved operational efficiency.',
-      icon: '🚀',
-      tech: ['Microservices', 'Automation', 'Cloud Migration', 'API Integration']
-    }
+  leadershipSkills: string[] = [];
+  technicalSkills: string[] = [];
+  featuredProjects: FeaturedProject[] = [];
+  testimonials: Testimonial[] = [];
+  blogPreviews: BlogPreview[] = [];
+  faqs: FAQ[] = [];
+  experiences: Experience[] = [];
+
+  stats = [
+    { value: '50+', label: 'Engineers Led' },
+    { value: '20+', label: 'Enterprise Systems Delivered' },
+    { value: '5+', label: 'Global Markets' },
+    { value: '10+', label: 'Years Building' }
   ];
 
-  // Compact Tech Stack Data
-  frontendTech: string[] = [
-    'Angular', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'RxJS'
-  ];
+  constructor(private apiService: ApiService) {}
 
-  backendTech: string[] = [
-    'Node.js', 'Express.js', 'Django', 'Django REST', 'Python', 'REST APIs', 'GraphQL'
-  ];
-
-  mobileDbTech: string[] = [
-    'Flutter', 'Dart', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQLite'
-  ];
-
-  devopsTech: string[] = [
-    'AWS', 'Docker', 'Kubernetes', 'CI/CD', 'GitHub Actions', 'Nginx', 'Linux'
-  ];
-
-  toolsTech: string[] = [
-    'Git', 'GitHub', 'Postman', 'VS Code', 'Jira', 'Figma', 'Swagger'
-  ];
-
-  learningTech: string[] = [
-    'Odoo', 'AI', 'GraphQL', 'Serverless'
-  ];
-
-  experiences: Experience[] = [
-    {
-      company: 'ACI Logistics Ltd.',
-      role: 'Software Engineer Level-II',
-      period: 'March 2025 - Present',
-      highlights: [
-        'Developed Flutter apps for 700+ retail outlets',
-        'Implemented real-time logistics management',
-        'Achieved 99% reduction in audit processing time'
-      ],
-      tech: ['Flutter', 'Angular', 'Django REST', 'PostgreSQL'],
-      companyLogo: 'assets/logo/aci.png'
-    },
-    {
-      company: 'Best Electronics Ltd.',
-      role: 'Deputy Manager (Software Engineer)',
-      period: 'Jan 2024 - Mar 2025',
-      highlights: [
-        'Led backend development & CI/CD implementation',
-        'Optimized operational costs by 30%',
-        'Automated order & delivery systems'
-      ],
-      tech: ['Django REST', 'Express.js', 'PostgreSQL', 'Docker'],
-      companyLogo: 'assets/logo/BEL.png'
-    },
-    {
-      company: 'Syesomatic Technologies',
-      role: 'Software Engineer',
-      period: 'May 2020 - Dec 2023',
-      highlights: [
-        'Built high-performance APIs and microservices',
-        'Architected AWS cloud infrastructure',
-        'Implemented Kubernetes for scalability'
-      ],
-      tech: ['AWS', 'Kubernetes', 'Node.js', 'Docker'],
-      companyLogo: 'assets/brands/sysco.png'
-    }
-  ];
-
-  // Method to get company logo background color
-  getCompanyLogoClass(index: number): string {
-    const colors = [
-      'bg-gradient-to-br from-red-500 to-red-600',
-      'bg-gradient-to-br from-white-700 to-orange-500', 
-      'bg-gradient-to-br from-white-500 to-white-600'
-    ];
-    return colors[index % colors.length];
+  ngOnInit(): void {
+    this.loadData();
   }
 
-  // Method to get period dot color
-  getPeriodDotClass(index: number): string {
-    const colors = [
-      'bg-red-600',
-      'bg-orange-500',
-      'bg-blue-500'
-    ];
-    return colors[index % colors.length];
+  loadData(): void {
+    this.apiService.getSkills().subscribe(skills => {
+      this.leadershipSkills = skills.filter(s => s.category === 'leadership').map(s => s.name);
+      this.technicalSkills = skills.filter(s => s.category === 'technical').map(s => s.name);
+    });
+
+    this.apiService.getProjects().subscribe(projects => {
+      // API returns a list, filter featured locally, or backend already handles it via ?is_featured=true 
+      // Assuming backend filtering isn't hooked up to this exact method yet, filter locally just in case.
+      this.featuredProjects = projects
+        .filter(p => p.is_featured)
+        .slice(0, 4)
+        .map(p => ({
+          id: p.id,
+          title: p.title,
+          industry: p.industry,
+          myRole: p.my_role,
+          description: p.description,
+          tech: p.tech,
+          slug: p.slug,
+          image: p.image
+        }));
+    });
+
+    this.apiService.getTestimonials().subscribe(testimonials => {
+      this.testimonials = testimonials.slice(0, 4);
+    });
+
+    this.apiService.getBlogPosts().subscribe(blogs => {
+      this.blogPreviews = blogs
+        .slice(0, 3)
+        .map(b => ({
+          id: b.id,
+          title: b.title,
+          excerpt: b.excerpt,
+          category: b.category,
+          date: b.date,
+          readTime: b.read_time,
+          slug: b.slug || b.id.toString(),
+          tags: b.tags || []
+        }));
+    });
+
+    this.apiService.getFAQs().subscribe(faqs => {
+      this.faqs = faqs.map(f => ({ ...f, open: false }));
+    });
+
+    this.apiService.getExperiences().subscribe(experiences => {
+      this.experiences = experiences.map(e => ({
+        id: e.id,
+        company: e.company,
+        role: e.role,
+        period: e.period,
+        isCurrent: e.is_current,
+        highlights: e.highlights || [],
+        tech: e.tech || [],
+        companyUrl: e.company_url || ''
+      }));
+    });
   }
 
-  // Handle logo loading errors
-  onLogoError(index: number): void {
-    this.logoErrors.add(index);
+  toggleFaq(index: number): void {
+    this.faqs[index].open = !this.faqs[index].open;
   }
 
-  // Check if logo has error
-  isLogoError(index: number): boolean {
-    return this.logoErrors.has(index);
-  }
-
-  // Get company initials for fallback
-  getCompanyInitials(company: string): string {
-    return company
-      .split(' ')
-      .map(word => word.charAt(0))
-      .join('')
-      .toUpperCase()
-      .substring(0, 2);
-  }
-
-  onProfileImageLoad(): void {
-    this.profileImageLoaded = true;
+  getStarArray(rating: number): number[] {
+    return Array(rating).fill(0);
   }
 }

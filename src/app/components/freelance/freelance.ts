@@ -1,117 +1,75 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  country: string;
+  rating: number;
+  date: string;
+  initials: string;
+  color: string;
+}
 
 @Component({
-  selector: 'app-freelance',
+  selector: 'app-feedback',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './freelance.html'
 })
-export class Freelance implements AfterViewInit, OnDestroy {
-  private currentVideoIndex = 0;
-  private currentTestimonialIndex = 0;
-  private autoSlideInterval: any;
-  private totalVideos = 2;
-  private totalTestimonials = 2;
-
-  ngAfterViewInit() {
-    this.initVideoCarousel();
-    this.initTestimonialCarousel();
-    this.startAutoSlide();
-  }
-
-  ngOnDestroy() {
-    if (this.autoSlideInterval) {
-      clearInterval(this.autoSlideInterval);
+export class Feedback {
+  testimonials: Testimonial[] = [
+    {
+      quote: "Zahed and the Syscomatic team delivered our entire retail management system ahead of schedule. The quality of engineering and communication was exceptional throughout.",
+      name: 'Arif Rahman',
+      role: 'CTO',
+      company: 'ACI Logistics Ltd.',
+      country: 'Bangladesh 🇧🇩',
+      rating: 5,
+      date: 'Jan 2026',
+      initials: 'AR',
+      color: '#7c3aed'
+    },
+    {
+      quote: "Working with Syscomatic was a game-changer for our operations. The Flutter app they built for our 200 outlets has transformed how our field team works every day.",
+      name: 'Sarah Mitchell',
+      role: 'VP Operations',
+      company: 'TechRetail Group',
+      country: 'United States 🇺🇸',
+      rating: 5,
+      date: 'Dec 2025',
+      initials: 'SM',
+      color: '#059669'
+    },
+    {
+      quote: "Zahed is not just a great engineer — he's a strategic partner. His team understands product, not just code. I'd work with them again without hesitation.",
+      name: 'Mohammed Al-Rashid',
+      role: 'Founder',
+      company: 'Launchpad Digital',
+      country: 'UAE 🇦🇪',
+      rating: 5,
+      date: 'Nov 2025',
+      initials: 'MA',
+      color: '#1e1b4b'
+    },
+    {
+      quote: "The inventory automation system built by Zahed's team saved us countless hours of manual data entry. Their attention to detail in the architecture is impressive.",
+      name: 'David Chen',
+      role: 'Head of Engineering',
+      company: 'Global Supply Co.',
+      country: 'Singapore 🇸🇬',
+      rating: 5,
+      date: 'Oct 2025',
+      initials: 'DC',
+      color: '#2563eb'
     }
-  }
+  ];
 
-  private initVideoCarousel() {
-    this.updateVideoCarousel();
-  }
-
-  private initTestimonialCarousel() {
-    this.updateTestimonialCarousel();
-  }
-
-  private startAutoSlide() {
-    this.autoSlideInterval = setInterval(() => {
-      this.nextVideo();
-    }, 6000); // Change every 6 seconds
-  }
-
-  // Video Carousel Methods
-  nextVideo() {
-    this.currentVideoIndex = (this.currentVideoIndex + 1) % this.totalVideos;
-    this.updateVideoCarousel();
-  }
-
-  prevVideo() {
-    this.currentVideoIndex = (this.currentVideoIndex - 1 + this.totalVideos) % this.totalVideos;
-    this.updateVideoCarousel();
-  }
-
-  goToVideo(index: number) {
-    this.currentVideoIndex = index;
-    this.updateVideoCarousel();
-  }
-
-  private updateVideoCarousel() {
-    const carousel = document.getElementById('videoCarousel');
-    const dots = document.querySelectorAll('.video-dot');
-    
-    if (carousel) {
-      const translateX = -this.currentVideoIndex * 100;
-      carousel.style.transform = `translateX(${translateX}%)`;
-    }
-    
-    // Update dots
-    dots.forEach((dot, index) => {
-      if (index === this.currentVideoIndex) {
-        dot.classList.add('bg-blue-600');
-        dot.classList.remove('bg-gray-300');
-      } else {
-        dot.classList.remove('bg-blue-600');
-        dot.classList.add('bg-gray-300');
-      }
-    });
-  }
-
-  // Testimonial Carousel Methods
-  nextTestimonial() {
-    this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.totalTestimonials;
-    this.updateTestimonialCarousel();
-  }
-
-  prevTestimonial() {
-    this.currentTestimonialIndex = (this.currentTestimonialIndex - 1 + this.totalTestimonials) % this.totalTestimonials;
-    this.updateTestimonialCarousel();
-  }
-
-  goToTestimonial(index: number) {
-    this.currentTestimonialIndex = index;
-    this.updateTestimonialCarousel();
-  }
-
-  private updateTestimonialCarousel() {
-    const carousel = document.getElementById('testimonialCarousel');
-    const dots = document.querySelectorAll('.testimonial-dot');
-    
-    if (carousel) {
-      const translateX = -this.currentTestimonialIndex * 100;
-      carousel.style.transform = `translateX(${translateX}%)`;
-    }
-    
-    // Update dots
-    dots.forEach((dot, index) => {
-      if (index === this.currentTestimonialIndex) {
-        dot.classList.add('bg-blue-600');
-        dot.classList.remove('bg-gray-300');
-      } else {
-        dot.classList.remove('bg-blue-600');
-        dot.classList.add('bg-gray-300');
-      }
-    });
+  getStarArray(rating: number): number[] {
+    return Array(rating).fill(0);
   }
 }

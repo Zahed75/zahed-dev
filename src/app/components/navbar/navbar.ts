@@ -1,9 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-// Angular Material imports
 import { MatIconModule } from '@angular/material/icon';
+import { ApiService } from '../../services/api';
 
 interface NavItem {
   name: string;
@@ -14,37 +13,52 @@ interface NavItem {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [
-    CommonModule, 
-    RouterModule,
-    MatIconModule // Add Material Icons
-  ],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './navbar.html'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isScrolled: boolean = false;
-  isMobileMenuOpen: boolean = false;
+  isMenuOpen: boolean = false;
+  calendlyUrl: string = 'https://calendly.com/zahed-hasan-rabbi/30min';
+  resumeUrl: string | null = null;
+
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit(): void {
+    this.apiService.getResume().subscribe({
+      next: (resumes) => {
+        if (resumes && resumes.length > 0) {
+          this.resumeUrl = resumes[0].file;
+        }
+      },
+      error: (err) => console.error('Error fetching resume', err)
+    });
+  }
 
   navItems: NavItem[] = [
-    { name: 'Home', path: '/', icon: 'home' },
-    { name: 'Projects', path: '/projects', icon: 'code' },
-    { name: 'Me', path: '/about-me', icon: 'work' },
-    { name: 'Case Studies', path: '/case-study', icon: 'analytics' },
-    { name: 'Freelance', path: '/freelance', icon: 'business_center' },
-    { name: 'Blogs', path: '/blog', icon: 'book' },
-    { name: 'Contact', path: '/contact', icon: 'mail' }
+    { name: 'Work', path: '/projects', icon: 'auto_awesome' },
+    { name: 'Blog', path: '/blog', icon: 'psychology' },
+    { name: 'Speaking', path: '/speaking', icon: 'mic' },
+    { name: 'About', path: '/about-me', icon: 'person_search' },
+    { name: 'Contact', path: '/contact', icon: 'handshake' }
   ];
 
-  @HostListener('window:scroll')
-  onWindowScroll(): void {
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
     this.isScrolled = window.scrollY > 20;
   }
 
-  toggleMobileMenu(): void {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    if (this.isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   }
 
-  closeMobileMenu(): void {
-    this.isMobileMenuOpen = false;
+  closeMenu() {
+    this.isMenuOpen = false;
+    document.body.style.overflow = '';
   }
 }
