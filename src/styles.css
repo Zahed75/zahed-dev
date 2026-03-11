@@ -2,24 +2,24 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════
-   DESIGN SYSTEM — Engineering Manager Portfolio
-   Theme: Always White. No dark mode. Professional. Readable.
-   Font: Inter (matching thezhasan.com)
+   DESIGN SYSTEM — PrimeNG Genesis Inspired Theme
+   Theme: Dark Slate, Glassmorphism, Bold Typography
+   Font: Inter
 ═══════════════════════════════════════════════════════════════ */
 
 @layer base {
   :root {
-    --color-black: #0A0A0A;
-    --color-white: #FFFFFF;
-    --color-gray-50: #F9FAFB;
-    --color-gray-100: #F3F4F6;
-    --color-gray-200: #E5E7EB;
-    --color-gray-300: #D1D5DB;
-    --color-gray-400: #9CA3AF;
-    --color-gray-500: #6B7280;
-    --color-gray-600: #4B5563;
-    --color-gray-700: #374151;
-    --color-gray-900: #111827;
+    --color-black: #0F172A; /* Deep Slate (Genesis Core) */
+    --color-white: #F8FAFC; /* Slate 50 */
+    --color-gray-50: #1E293B; /* Slate 800 - Surfaces */
+    --color-gray-100: #334155; /* Slate 700 - Borders/Hover */
+    --color-gray-200: #475569; /* Slate 600 */
+    --color-gray-300: #64748B; /* Slate 500 */
+    --color-gray-400: #94A3B8; /* Slate 400 - Muted Text */
+    --color-gray-500: #CBD5E1; /* Slate 300 */
+    --color-gray-600: #E2E8F0; /* Slate 200 */
+    --color-gray-700: #F1F5F9; /* Slate 100 */
+    --color-gray-900: #FFFFFF; /* Pure White overrides for specific text */
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
@@ -35,8 +35,8 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #FFFFFF;
-    color: #0A0A0A;
+    background-color: #0F172A !important; /* Deep Slate Base — Genesis Dark */
+    color: #F8FAFC !important; /* High contrast readable text */
     line-height: 1.6;
     overflow-x: hidden;
   }
@@ -44,9 +44,9 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     font-weight: 800;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em; /* Tighter tracking for Genesis headers */
     line-height: 1.1;
-    color: #0A0A0A;
+    color: #FFFFFF;
   }
 
   a {
@@ -86,87 +86,87 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #6B7280;
-    margin-bottom: 1rem;
+    color: var(--color-gray-400); /* Slate 400 for Genesis muted look */
+    margin-bottom: 1.5rem;
   }
 
   .heading-display {
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(3rem, 7vw, 6.5rem);
     font-weight: 900;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em; /* Tighter Genesis kerning */
     line-height: 1.0;
-    color: #0A0A0A;
+    color: var(--color-white);
   }
 
   .heading-xl {
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
-    letter-spacing: -0.03em;
-    color: #0A0A0A;
+    letter-spacing: -0.04em;
+    color: var(--color-white);
+    line-height: 1.1;
   }
 
   .heading-lg {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
     font-weight: 800;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
+    color: var(--color-white);
   }
 
   .body-lg {
     font-size: 1.125rem;
     font-weight: 400;
-    line-height: 1.75;
-    color: #374151;
+    line-height: 1.8;
+    color: var(--color-gray-400); /* Slate 400 Muted */
   }
 
   .body-md {
     font-size: 1rem;
     line-height: 1.7;
-    color: #4B5563;
+    color: var(--color-gray-400); /* Muted slate */
   }
 
-  /* ── Buttons ─────────────────────────────── */
+  /* ── Buttons (Genesis Pill Style) ─────────────── */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.875rem 2rem;
+    padding: 0.875rem 2.25rem;
     font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-radius: 9999px; /* Fully rounded pill shape */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     white-space: nowrap;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
   }
 
   .btn-primary {
-    background: #0A0A0A;
-    color: #FFFFFF;
-    border-color: #0A0A0A;
+    background: var(--color-white);
+    color: var(--color-black);
   }
-
+  
   .btn-primary:hover {
-    background: #1F2937;
-    border-color: #1F2937;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    background: #E2E8F0; /* Brighter white push */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.1), 0 8px 10px -6px rgba(255, 255, 255, 0.1);
   }
 
   .btn-secondary {
-    background: transparent;
-    color: #0A0A0A;
-    border-color: #D1D5DB;
+    background: var(--color-gray-50); /* Slate 800 surface */
+    color: var(--color-white);
+    border: 1px solid var(--color-gray-100);
   }
 
   .btn-secondary:hover {
-    border-color: #0A0A0A;
-    transform: translateY(-1px);
+    background: var(--color-gray-100); /* Slate 700 */
+    transform: translateY(-2px);
   }
 
   .btn-white {
@@ -181,66 +181,75 @@
   }
 
   /* Legacy aliases */
-  .btn-sleek-black { background: #0A0A0A; color: #FFFFFF; }
-  .btn-sleek-black:hover { background: #374151; }
-  .btn-sleek-white { background: #FFFFFF; color: #0A0A0A; border: 2px solid #0A0A0A; }
-  .btn-sleek-white:hover { background: #0A0A0A; color: #FFFFFF; }
+  .btn-sleek-black { background: var(--color-white); color: var(--color-black); }
+  .btn-sleek-black:hover { background: #E2E8F0; }
+  .btn-sleek-white { background: transparent; color: var(--color-white); border: 1px solid rgba(255, 255, 255, 0.2); }
+  .btn-sleek-white:hover { background: rgba(255, 255, 255, 0.1); }
+  
   .btn-primary, .btn-secondary, .btn-white, .btn-sleek-black, .btn-sleek-white {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.875rem 2rem;
+    padding: 0.875rem 2.25rem;
     font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-radius: 9999px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     white-space: nowrap;
-    border: 2px solid transparent;
   }
 
-  /* ── Cards ─────────────────────────────── */
+  /* ── Cards (Genesis Translucent Hover Style) ── */
   .card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: 12px;
-    padding: 2rem;
-    transition: all 0.3s ease;
+    background: rgba(30, 41, 59, 0.4); /* Slate 800 with 40% opacity */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Very thin edge */
+    border-radius: 24px; /* Large Genesis radiuses */
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .card:hover {
-    border-color: #9CA3AF;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    transform: translateY(-2px);
+    background: rgba(30, 41, 59, 0.7); /* Deepens on hover */
+    border-color: rgba(255, 255, 255, 0.15); /* Edge lights up */
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
   }
 
   .card-dark {
-    background: #0A0A0A;
-    color: #FFFFFF;
-    border-radius: 12px;
-    padding: 2rem;
+    background: var(--color-gray-50);
+    color: var(--color-white);
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   /* ── Tags / Pills ─────────────────────── */
   .tag {
     display: inline-block;
-    padding: 0.35rem 0.85rem;
+    padding: 0.35rem 1rem;
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    background: #F3F4F6;
-    color: #374151;
-    border-radius: 100px;
-    border: 1px solid #E5E7EB;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-gray-400); /* Slate 400 */
+    border-radius: 9999px; /* Pill */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .tag-outline {
     background: transparent;
-    border: 1px solid #D1D5DB;
-    color: #6B7280;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--color-gray-300);
   }
 
   /* ── Labels ─────────────────────────── */
@@ -250,14 +259,14 @@
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #6B7280;
+    color: var(--color-gray-300);
     margin-bottom: 1rem;
   }
 
   /* ── Dividers ────────────────────────── */
   .divider {
     border: none;
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid rgba(255, 255, 255, 0.08); /* Genesis faint white lines */
   }
 
   /* ── FAQ ─────────────────────────────── */
@@ -270,75 +279,86 @@
     font-weight: 600;
     text-align: left;
     padding-block: 1.25rem;
-    color: #0A0A0A;
+    color: var(--color-white);
     cursor: pointer;
     background: none;
     border: none;
     gap: 1rem;
+    transition: color 0.2s ease;
+  }
+  
+  .faq-question:hover {
+    color: var(--color-gray-400);
   }
 
   .faq-answer {
     font-size: 0.95rem;
-    color: #4B5563;
+    color: var(--color-gray-400); /* Slate 400 */
     line-height: 1.75;
     padding-bottom: 1.25rem;
   }
 
   /* ── Nav Active ──────────────────────── */
   .nav-link-active {
-    color: #0A0A0A;
-    font-weight: 600;
+    color: var(--color-white);
+    font-weight: 700;
   }
 
   /* ── Prose / Article Content ─────────── */
   .article-content p {
-    margin-bottom: 1.5rem;
-    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    font-size: 1.125rem; /* Larger Genesis body */
     line-height: 1.8;
-    color: #374151;
+    color: var(--color-gray-400);
   }
 
   .article-content h2 {
-    font-size: 1.75rem;
-    font-weight: 800;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    color: #0A0A0A;
+    font-size: 2.25rem; /* Massive section headers */
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-white);
   }
 
   .article-content h3 {
-    font-size: 1.375rem;
-    font-weight: 700;
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-white);
   }
 
   .article-content blockquote {
-    border-left: 4px solid #0A0A0A;
-    padding: 1rem 1.5rem;
-    margin: 2rem 0;
-    font-size: 1.1rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem 2rem;
+    margin: 3rem 0;
+    font-size: 1.25rem;
     font-style: italic;
-    color: #1F2937;
-    background: #F9FAFB;
-    border-radius: 0 8px 8px 0;
+    font-weight: 500;
+    color: var(--color-white);
+    background: rgba(30, 41, 59, 0.4); /* Slate 800 surface */
+    border-radius: 12px;
   }
 
   .article-content ul {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     padding-left: 1.5rem;
     list-style-type: disc;
+    color: var(--color-gray-400);
   }
 
   .article-content li {
-    margin-bottom: 0.5rem;
-    color: #374151;
+    margin-bottom: 0.75rem;
+    color: var(--color-gray-400);
+    line-height: 1.7;
   }
 
   .prose-monochrome {
-    font-size: 1.05rem;
+    font-size: 1.125rem;
     line-height: 1.8;
-    color: #374151;
+    color: var(--color-gray-400);
   }
 
   /* ── Section Container Aliases ────────── */
@@ -362,35 +382,35 @@
 
   /* ── Text Utilities ─────────────────── */
   .text-display {
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(3.5rem, 8vw, 7rem); /* Even larger for Genesis hero */
     font-weight: 900;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em; /* Tighter kerning */
     line-height: 1.0;
-    color: #0A0A0A;
+    color: var(--color-white);
   }
 
   .text-founder-story {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 400;
-    line-height: 1.75;
-    color: #374151;
+    line-height: 1.8;
+    color: var(--color-gray-400);
     max-width: 52ch;
   }
 
   @media (min-width: 1024px) {
-    .text-founder-story { font-size: 1.35rem; }
+    .text-founder-story { font-size: 1.5rem; }
   }
 }
 
 /* ══ Global Scrollbar ══════════════════════════════════════ */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F9FAFB; }
-::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #6B7280; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-black); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
 
 /* ══ Animations ════════════════════════════════════════════ */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(32px); }
+  from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -400,51 +420,51 @@
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.96); }
+  from { opacity: 0; transform: scale(0.94); }
   to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-24px); }
+  from { opacity: 0; transform: translateX(-40px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
 .animate-fade-up {
-  animation: fadeInUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 0;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease forwards;
+  animation: fadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 0;
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 0;
 }
 
 .animate-slide-left {
-  animation: slideInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: slideInLeft 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 0;
 }
 
-.stagger-1 { animation-delay: 80ms; }
-.stagger-2 { animation-delay: 160ms; }
-.stagger-3 { animation-delay: 240ms; }
-.stagger-4 { animation-delay: 320ms; }
-.stagger-5 { animation-delay: 400ms; }
-.stagger-6 { animation-delay: 480ms; }
+.stagger-1 { animation-delay: 100ms; }
+.stagger-2 { animation-delay: 200ms; }
+.stagger-3 { animation-delay: 300ms; }
+.stagger-4 { animation-delay: 400ms; }
+.stagger-5 { animation-delay: 500ms; }
+.stagger-6 { animation-delay: 600ms; }
 
 /* Legacy .reveal */
 .reveal {
-  animation: fadeInUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 0;
 }
 
 /* ══ Skeleton Loading ══════════════════════════════════════ */
 .skeleton {
-  background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%);
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 6px;

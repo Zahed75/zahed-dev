@@ -1,18 +1,21 @@
-<main id="main-content" class="min-h-screen bg-white">
+<main id="main-content" class="min-h-screen bg-transparent">
   
   <!-- Hero Section -->
-  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 border-b border-gray-100">
-    <div class="container-xl">
+  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 border-b border-white/5 overflow-hidden">
+    <!-- Genesis Ambient Glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-slate-700/20 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+    <div class="container-xl relative z-10">
       <div class="grid lg:grid-cols-12 gap-16 items-center">
         <div class="lg:col-span-7 animate-fade-up">
-          <span class="eyebrow">Strategic Profile</span>
+          <span class="eyebrow !text-slate-400">Strategic Profile</span>
           <h1 class="heading-display mb-8">
             Zahed Hasan. <br/>
-            <span class="text-gray-400">Scale Architect.</span>
+            <span class="text-slate-500">Scale Architect.</span>
           </h1>
           
-          <p class="body-lg max-w-xl mb-10">
-            I am the Engineering Manager & Co-founder of <a href="https://syscomatic.com" target="_blank" class="font-bold text-black border-b-2 border-black/20 hover:border-black transition-colors">Syscomatic LLC</a>. 
+          <p class="body-lg max-w-xl mb-10 pl-4 border-l-2 border-slate-700">
+            I am the Engineering Manager & Co-founder of <a href="https://syscomatic.com" target="_blank" class="font-bold text-white border-b-2 border-white/20 hover:border-white transition-colors">Syscomatic LLC</a>. 
             My mandate is bridging high-level business vision with rigorous, reliable technical execution.
           </p>
 
@@ -22,9 +25,11 @@
         </div>
         
         <div class="lg:col-span-5 animate-fade-up stagger-1">
-          <div class="relative max-w-sm mx-auto w-full aspect-[4/5] bg-gray-100 p-4 border border-gray-200 rotate-2 hover:rotate-0 transition-transform duration-500">
-            <div class="w-full h-full bg-gray-300 relative overflow-hidden grayscale">
-              <img src="assets/project/zahed.jpeg" alt="Zahed Hasan" class="w-full h-full object-cover" onerror="this.src='https://plus.unsplash.com/premium_photo-1683141154082-324d296faa5a?q=80&w=1000&auto=format&fit=crop'">
+          <div class="relative max-w-sm mx-auto w-full aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.4)] hover:border-white/20 transition-all duration-500 group">
+            <div class="w-full h-full bg-slate-800 relative overflow-hidden">
+              <img src="assets/project/zahed.jpeg" alt="Zahed Hasan" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" onerror="this.src='https://plus.unsplash.com/premium_photo-1683141154082-324d296faa5a?q=80&w=1000&auto=format&fit=crop'">
+              <!-- Subtle gradient overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent pointer-events-none"></div>
             </div>
           </div>
         </div>
@@ -33,71 +38,71 @@
   </section>
 
   <!-- Editorial Story Section -->
-  <section class="section-py bg-gray-50 border-b border-gray-100">
+  <section class="section-py border-b border-white/5 relative">
     <div class="container-xl max-w-4xl">
-      <div class="animate-fade-up">
-        <span class="eyebrow text-center w-full block">The Narrative</span>
-        <h2 class="heading-xl text-center mb-16">
+      <div class="animate-fade-up text-center">
+        <span class="eyebrow !text-slate-400 w-full block">The Narrative</span>
+        <h2 class="heading-xl mb-16">
           Scaling Engineering <br/>
-          Without <span class="text-gray-400">Chaos.</span>
+          Without <span class="text-slate-500">Chaos.</span>
         </h2>
       </div>
 
-      <div class="prose-monochrome animate-fade-up stagger-1 space-y-8">
-        <p class="text-xl font-medium leading-relaxed text-black">
+      <div class="card !bg-slate-800/20 animate-fade-up stagger-1 space-y-8">
+        <p class="text-xl font-medium leading-relaxed text-white">
           What works for a team of 5 engineers catastrophically fails at 50. Communication paths multiply exponentially, and without intentional architectural and organizational design, delivery velocity grinds to a halt.
         </p>
 
-        <p>
+        <p class="text-slate-400 text-lg leading-relaxed">
           Throughout my career, I've observed this pattern repeatedly. Founders sprint to product-market fit, accumulating massive technical and organizational debt. When the time comes to scale the company, the monolithic architecture and siloed engineering teams become the primary bottleneck to growth.
         </p>
 
-        <p>
-          At <strong>Syscomatic LLC</strong>, we solve exactly this. We implement Software Delivery as a Service (SDaaS)—deploying high-functioning, cross-functional engineering pods that integrate seamlessly into enterprise roadmaps. My role as Engineering Manager is to architect both the systems we deploy, and the teams that build them.
+        <p class="text-slate-400 text-lg leading-relaxed">
+          At <strong class="text-white font-bold">Syscomatic LLC</strong>, we solve exactly this. We implement Software Delivery as a Service (SDaaS)—deploying high-functioning, cross-functional engineering pods that integrate seamlessly into enterprise roadmaps. My role as Engineering Manager is to architect both the systems we deploy, and the teams that build them.
         </p>
 
-        <blockquote>
+        <blockquote class="border-l-2 border-white/20 pl-6 py-2 italic text-white text-xl font-medium">
           "Technical debt is a tool, not a sin. The failure is not in accumulating it, but in failing to schedule its amortization."
         </blockquote>
 
-        <p>
-          I specialize in <strong>Distributed Systems Architecture</strong> (Python, Go, Kubernetes), <strong>Team Topology Design</strong> (Spotify Model, Domain-Driven Squads), and establishing high-trust, low-friction engineering cultures.
+        <p class="text-slate-400 text-lg leading-relaxed">
+          I specialize in <strong class="text-white">Distributed Systems Architecture</strong> (Python, Go, Kubernetes), <strong class="text-white">Team Topology Design</strong> (Spotify Model, Domain-Driven Squads), and establishing high-trust, low-friction engineering cultures.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Skills Dual-Track -->
-  <section class="section-py bg-white">
+  <section class="section-py border-b border-white/5 relative">
     <div class="container-xl">
       <div class="mb-16 animate-fade-up text-center">
-        <span class="eyebrow">Core Competencies</span>
+        <span class="eyebrow !text-slate-400">Core Competencies</span>
         <h2 class="heading-xl">Leadership & Technical Expertise.</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-12 lg:gap-20 max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
         <!-- Leadership -->
-        <div class="animate-fade-up stagger-1 p-8 rounded-2xl bg-gray-50 border border-gray-100">
-          <div class="w-12 h-12 bg-black text-white flex items-center justify-center mb-8 rounded-lg shadow-lg shadow-black/10">
+        <div class="card !bg-slate-800/20 animate-fade-up stagger-1">
+          <div class="w-12 h-12 bg-white/10 border border-white/10 text-white flex items-center justify-center mb-8 rounded-2xl">
             <mat-icon class="!w-6 !h-6">leaderboard</mat-icon>
           </div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-8">Leadership Track</h3>
+          <h3 class="text-xl font-bold uppercase tracking-widest mb-8 text-white border-b border-white/10 pb-4">Leadership Track</h3>
           <div class="flex flex-wrap gap-3">
             @for (skill of leadershipSkills; track skill) {
-              <span class="tag tag-outline !bg-white cursor-default hover:border-black">{{ skill }}</span>
+              <span class="tag tag-outline cursor-default">{{ skill }}</span>
             }
           </div>
         </div>
 
         <!-- Technical -->
-        <div class="animate-fade-up stagger-2 p-8 rounded-2xl bg-gray-50 border border-gray-100">
-          <div class="w-12 h-12 bg-black text-white flex items-center justify-center mb-8 rounded-lg shadow-lg shadow-black/10">
+        <div class="card !bg-slate-800/20 animate-fade-up stagger-2">
+          <div class="w-12 h-12 bg-white/10 border border-white/10 text-white flex items-center justify-center mb-8 rounded-2xl">
             <mat-icon class="!w-6 !h-6">code</mat-icon>
           </div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-8">Technical Track</h3>
+          <h3 class="text-xl font-bold uppercase tracking-widest mb-8 text-white border-b border-white/10 pb-4">Technical Track</h3>
           <div class="flex flex-wrap gap-3">
             @for (skill of technicalSkills; track skill) {
-              <span class="tag tag-outline !bg-white cursor-default hover:border-black">{{ skill }}</span>
+              <span class="tag tag-outline cursor-default">{{ skill }}</span>
             }
           </div>
         </div>
@@ -106,48 +111,48 @@
   </section>
 
   <!-- Experience Timeline -->
-  <section class="section-py bg-black text-white">
+  <section class="section-py border-b border-white/5 relative">
     <div class="container-xl">
-      <div class="mb-20 animate-fade-up text-center">
-        <span class="eyebrow !text-gray-400">Career Trajectory</span>
-        <h2 class="heading-xl !text-white">Professional Experience.</h2>
+      <div class="mb-16 animate-fade-up text-center">
+        <span class="eyebrow !text-slate-400">Career Trajectory</span>
+        <h2 class="heading-xl">Professional Experience.</h2>
       </div>
 
-      <div class="space-y-16 max-w-4xl mx-auto">
+      <div class="space-y-8 max-w-4xl mx-auto">
         @for (exp of experiences; track exp.id) {
-          <div class="animate-fade-up stagger-1 relative pl-8 lg:pl-12 border-l border-gray-800 pb-12 last:pb-0">
-            <!-- Timeline dot -->
-            <div class="absolute w-4 h-4 bg-black border-2 border-white rounded-full -left-[8.5px] top-1" [class.border-white]="exp.isCurrent" [class.border-gray-700]="!exp.isCurrent"></div>
+          <div class="card !bg-slate-800/20 animate-fade-up stagger-1 relative overflow-hidden">
+            <!-- Left accent bar -->
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-white/10" [class.!bg-white]="exp.isCurrent"></div>
             
             <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
               <div>
                 <div class="flex items-center gap-4 mb-2">
                   <h3 class="text-3xl font-black tracking-tight text-white">{{ exp.company }}</h3>
-                  <span *ngIf="exp.isCurrent" class="tag !bg-white !text-black !border-white !py-0.5 !px-2 !text-[0.6rem] !font-black">CURRENT</span>
+                  <span *ngIf="exp.isCurrent" class="tag !bg-white !text-black !border-transparent !py-1 !px-3 !text-[0.65rem]">CURRENT</span>
                 </div>
-                <div class="text-xl font-bold text-gray-400">{{ exp.role }}</div>
+                <div class="text-xl font-bold text-slate-400">{{ exp.role }}</div>
               </div>
-              <div class="text-sm font-bold text-gray-500 tracking-widest uppercase md:mt-3">
+              <div class="text-sm font-bold text-slate-500 tracking-widest uppercase md:mt-3 bg-slate-900/50 px-3 py-1 rounded-full shrink-0">
                 {{ exp.period }}
               </div>
             </div>
             
-            <ul class="space-y-4 max-w-2xl mt-8 mb-8">
+            <ul class="space-y-4 max-w-2xl mt-6 mb-8">
               @for (highlight of exp.highlights; track highlight) {
-                <li class="flex items-start gap-4 text-gray-300">
-                  <div class="w-1.5 h-1.5 mt-2.5 bg-gray-500 rounded-full flex-shrink-0"></div>
+                <li class="flex items-start gap-4 text-slate-300">
+                  <mat-icon class="!text-[18px] !w-[18px] !h-[18px] mt-1 text-slate-500 flex-shrink-0">check_circle</mat-icon>
                   <span class="text-base lg:text-lg leading-relaxed">{{ highlight }}</span>
                 </li>
               }
             </ul>
 
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
               @for (tech of exp.tech; track tech) {
-                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-full">{{ tech }}</span>
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider bg-slate-900/50 px-2 py-1 rounded">{{ tech }}</span>
               }
             </div>
             
-            <a *ngIf="exp.companyUrl" [href]="exp.companyUrl" target="_blank" class="inline-flex items-center gap-2 mt-8 text-sm font-bold text-white uppercase tracking-widest border-b border-gray-700 hover:border-white transition-colors pb-1">
+            <a *ngIf="exp.companyUrl" [href]="exp.companyUrl" target="_blank" class="inline-flex items-center gap-2 mt-8 text-sm font-bold text-slate-400 hover:text-white uppercase tracking-widest border-b border-white/10 hover:border-white/40 transition-colors pb-1">
               Visit Company <mat-icon class="!w-4 !h-4 !text-base">arrow_forward</mat-icon>
             </a>
           </div>
@@ -157,25 +162,25 @@
   </section>
 
   <!-- Education and Certifications -->
-  <section class="section-py bg-gray-50 border-t border-gray-100">
+  <section class="section-py border-t border-white/5 relative">
     <div class="container-xl max-w-5xl mx-auto">
       <div class="grid lg:grid-cols-2 gap-16">
         
         <!-- Education -->
         <div class="animate-fade-up">
           <div class="mb-12">
-            <span class="eyebrow">Academic Background</span>
+            <span class="eyebrow !text-slate-400">Academic Background</span>
             <h2 class="heading-lg">Education.</h2>
           </div>
           
-          <div class="space-y-12">
+          <div class="space-y-8">
             @for (edu of educations; track edu.degree) {
-              <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-1.5 h-full bg-black"></div>
-                <h3 class="text-xl font-black tracking-tight mb-2">{{ edu.degree }}</h3>
-                <div class="text-[0.7rem] font-bold text-gray-500 tracking-widest uppercase mb-4">{{ edu.institution }} — {{ edu.location }}</div>
-                <div class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6">{{ edu.period }}</div>
-                <p class="text-sm text-gray-600 leading-relaxed">{{ edu.description }}</p>
+              <div class="card !bg-slate-800/20 !p-8 relative overflow-hidden">
+                <div class="absolute left-0 top-0 bottom-0 w-1 bg-white"></div>
+                <h3 class="text-xl font-black tracking-tight mb-2 text-white">{{ edu.degree }}</h3>
+                <div class="text-[0.7rem] font-bold text-slate-400 tracking-widest uppercase mb-4">{{ edu.institution }} — {{ edu.location }}</div>
+                <div class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-6">{{ edu.period }}</div>
+                <p class="text-sm text-slate-400 leading-relaxed">{{ edu.description }}</p>
               </div>
             }
           </div>
@@ -184,18 +189,18 @@
         <!-- Certifications -->
         <div class="animate-fade-up stagger-1">
           <div class="mb-12">
-            <span class="eyebrow">Continuous Learning</span>
+            <span class="eyebrow !text-slate-400">Continuous Learning</span>
             <h2 class="heading-lg">Certifications.</h2>
           </div>
           
-          <div class="grid gap-6">
+          <div class="grid gap-4">
             @for (cert of certifications; track cert.name) {
-              <div class="bg-white p-6 rounded-lg border border-gray-100 hover:border-black transition-colors group flex flex-col justify-between">
+              <div class="card !bg-slate-800/20 !p-6 hover:!bg-slate-800/40 hover:!border-white/20 group flex flex-col justify-between">
                 <div>
-                  <h4 class="text-[1.05rem] font-bold text-black mb-1 group-hover:text-gray-600 transition-colors leading-tight">{{ cert.name }}</h4>
-                  <div class="text-xs font-semibold text-gray-500 mb-4">{{ cert.issuer }} <span *ngIf="cert.id" class="text-gray-400">| {{ cert.id }}</span></div>
+                  <h4 class="text-[1.05rem] font-bold text-slate-200 mb-1 group-hover:text-white transition-colors leading-tight">{{ cert.name }}</h4>
+                  <div class="text-xs font-semibold text-slate-500 mb-4">{{ cert.issuer }} <span *ngIf="cert.id" class="text-slate-600">| {{ cert.id }}</span></div>
                 </div>
-                <div class="text-[0.6rem] font-bold tracking-widest uppercase text-gray-400">{{ cert.date }}</div>
+                <div class="text-[0.6rem] font-bold tracking-widest uppercase text-slate-500">{{ cert.date }}</div>
               </div>
             }
           </div>

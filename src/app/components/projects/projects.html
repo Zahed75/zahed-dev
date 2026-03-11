@@ -1,12 +1,15 @@
-<main id="main-content" class="min-h-screen bg-white">
+<main id="main-content" class="min-h-screen bg-transparent">
   
   <!-- Header -->
-  <section class="pt-32 pb-16 lg:pt-48 lg:pb-20 border-b border-gray-100 bg-gray-50">
-    <div class="container-xl">
+  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 border-b border-white/5 relative overflow-hidden">
+    <!-- Genesis Ambient Glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-slate-700/30 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+    <div class="container-xl relative z-10">
       <div class="max-w-3xl animate-fade-up">
-        <span class="eyebrow">Portfolio</span>
-        <h1 class="heading-display mb-6">Strategic Outcomes.</h1>
-        <p class="body-lg max-w-2xl">
+        <span class="eyebrow !text-slate-400">Portfolio</span>
+        <h1 class="heading-display mb-8">Strategic Outcomes.</h1>
+        <p class="body-lg max-w-2xl pl-4 border-l-2 border-slate-700">
           A selection of enterprise systems, intelligent infrastructure, and scaling initiatives I've led from architecture through execution.
         </p>
       </div>
@@ -14,69 +17,73 @@
   </section>
 
   <!-- Projects Grid -->
-  <section class="section-py bg-white">
+  <section class="section-py relative border-b border-white/5">
     <div class="container-xl">
       
       <!-- Loading State -->
-      <div *ngIf="isLoading" class="grid lg:grid-cols-2 gap-12 animate-pulse">
+      <div *ngIf="isLoading" class="grid lg:grid-cols-2 gap-8 lg:gap-12 animate-pulse">
         @for (i of [1,2,3,4]; track i) {
-          <div>
-            <div class="w-full aspect-[4/3] bg-gray-200 mb-6 rounded-md"></div>
-            <div class="h-4 w-32 bg-gray-200 mb-4 rounded"></div>
-            <div class="h-8 w-3/4 bg-gray-200 mb-6 rounded"></div>
-            <div class="h-16 w-full bg-gray-200 rounded"></div>
+          <div class="card !p-0 !bg-slate-800/10 !border-white/5">
+            <div class="w-full aspect-[4/3] bg-slate-800/40 rounded-t-[2rem]"></div>
+            <div class="p-8">
+              <div class="h-4 w-32 bg-slate-800/40 mb-4 rounded"></div>
+              <div class="h-8 w-3/4 bg-slate-800/40 mb-6 rounded"></div>
+              <div class="h-16 w-full bg-slate-800/40 rounded"></div>
+            </div>
           </div>
         }
       </div>
 
       <!-- Content -->
-      <div *ngIf="!isLoading" class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+      <div *ngIf="!isLoading" class="grid lg:grid-cols-2 gap-8 lg:gap-12">
         @for (project of projects; track project.id) {
-          <div class="group relative animate-fade-up stagger-1">
-            <a [routerLink]="['/projects', project.slug]" class="block relative aspect-[4/3] bg-gray-100 overflow-hidden mb-8 border border-gray-200 transition-all duration-500 group-hover:border-black rounded-sm shadow-sm hover:shadow-xl">
-              <img *ngIf="project.image" [src]="project.image" [alt]="project.title" class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105">
+          <div class="card !p-0 overflow-hidden group relative animate-fade-up stagger-1 !bg-slate-800/30 flex flex-col">
+            <a [routerLink]="['/projects', project.slug]" class="block relative aspect-[4/3] bg-slate-900 border-b border-white/5">
+              <img *ngIf="project.image" [src]="project.image" [alt]="project.title" class="object-cover w-full h-full opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105">
               <div *ngIf="!project.image" class="absolute inset-0 flex items-center justify-center opacity-30">
-                <span class="text-2xl font-black uppercase tracking-widest text-black">{{ project.title }}</span>
+                <span class="text-2xl font-black uppercase tracking-widest text-white">{{ project.title }}</span>
               </div>
               
               <!-- Featured Badge -->
-              <div *ngIf="project.is_featured" class="absolute top-4 left-4 tag !bg-black !text-white !border-black shadow-md">
+              <div *ngIf="project.is_featured" class="absolute top-6 left-6 tag !bg-white/10 !text-white !border-white/20 backdrop-blur-md shadow-lg">
                 Featured Case Study
               </div>
             </a>
             
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-bold tracking-widest uppercase text-gray-500">{{ project.industry }}</span>
-              <span class="text-xs font-bold tracking-widest uppercase text-black">{{ project.myRole }}</span>
-            </div>
+            <div class="p-8 flex flex-col flex-1">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold tracking-widest uppercase text-slate-400">{{ project.industry }}</span>
+                <span class="text-xs font-bold tracking-widest uppercase text-slate-500">{{ project.myRole }}</span>
+              </div>
 
-            <h2 class="text-3xl font-black tracking-tight mb-4 group-hover:text-gray-500 transition-colors">
-              <a [routerLink]="['/projects', project.slug]">
-                {{ project.title }}
-              </a>
-            </h2>
-            
-            <p class="text-gray-600 mb-8 line-clamp-2 md:line-clamp-3 leading-relaxed">
-              {{ project.description }}
-            </p>
+              <h2 class="text-3xl font-black tracking-tight mb-4 group-hover:text-white text-slate-200 transition-colors">
+                <a [routerLink]="['/projects', project.slug]">
+                  {{ project.title }}
+                </a>
+              </h2>
+              
+              <p class="text-slate-400 mb-8 line-clamp-3 leading-relaxed flex-1">
+                {{ project.description }}
+              </p>
 
-            <div class="flex flex-wrap gap-[0.4rem] mb-8">
-              @for (tech of project.tech; track tech) {
-                <span class="tag tag-outline !text-[0.6rem] !px-2 !py-0.5">{{ tech }}</span>
-              }
-            </div>
-
-            <div class="flex items-center gap-4 flex-wrap mt-auto">
-              <a [routerLink]="['/projects', project.slug]" class="btn btn-primary !px-5 !py-2 !text-xs">
-                View Case Study
-              </a>
-              @if (project.keyFeatures && project.keyFeatures.links && project.keyFeatures.links.length) {
-                @for (link of project.keyFeatures.links; track link.label) {
-                  <a [href]="link.url" target="_blank" class="text-xs font-bold text-gray-400 hover:text-black uppercase tracking-widest inline-flex items-center gap-1 transition-colors border border-gray-100 px-3 py-1.5 rounded hover:border-black">
-                    {{ link.label }} <mat-icon class="!w-[14px] !h-[14px] !text-[14px] ml-0.5">open_in_new</mat-icon>
-                  </a>
+              <div class="flex flex-wrap gap-2 mb-8">
+                @for (tech of project.tech; track tech) {
+                  <span class="tag tag-outline !text-[0.6rem] !px-2.5 !py-1 !border-white/10 text-slate-400">{{ tech }}</span>
                 }
-              }
+              </div>
+
+              <div class="flex items-center gap-4 flex-wrap mt-auto pt-6 border-t border-white/5">
+                <a [routerLink]="['/projects', project.slug]" class="btn btn-secondary !px-6 !py-2.5 !text-xs w-full lg:w-auto text-center">
+                  View Case Study
+                </a>
+                @if (project.keyFeatures && project.keyFeatures.links && project.keyFeatures.links.length) {
+                  @for (link of project.keyFeatures.links; track link.label) {
+                    <a [href]="link.url" target="_blank" class="text-xs font-bold text-slate-500 hover:text-white uppercase tracking-widest inline-flex items-center justify-center gap-1.5 transition-colors border border-white/10 px-4 py-2.5 rounded-full hover:border-white/30 bg-slate-900/50 w-full lg:w-auto">
+                      {{ link.label }} <mat-icon class="!w-[14px] !h-[14px] !text-[14px] ml-0.5">open_in_new</mat-icon>
+                    </a>
+                  }
+                }
+              </div>
             </div>
           </div>
         }

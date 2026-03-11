@@ -1,12 +1,15 @@
-<main id="main-content" class="min-h-screen bg-white">
+<main id="main-content" class="min-h-screen bg-transparent">
   
   <!-- Header -->
-  <section class="pt-32 pb-16 lg:pt-48 lg:pb-20 border-b border-gray-100 bg-gray-50">
-    <div class="container-xl">
+  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 border-b border-white/5 overflow-hidden">
+    <!-- Genesis Ambient Glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-slate-700/30 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+    <div class="container-xl relative z-10">
       <div class="max-w-3xl animate-fade-up">
-        <span class="eyebrow">Advisory & Strategy</span>
-        <h1 class="heading-display mb-6">Engineering Intelligence.</h1>
-        <p class="body-lg max-w-2xl">
+        <span class="eyebrow !text-slate-400">Advisory & Strategy</span>
+        <h1 class="heading-display mb-8">Engineering Intelligence.</h1>
+        <p class="body-lg max-w-2xl pl-4 border-l-2 border-slate-700">
           Essays and advisory on scaling technical organizations, architectural patterns, and the intersection of business strategy and software delivery.
         </p>
       </div>
@@ -14,48 +17,49 @@
   </section>
 
   <!-- Loading State -->
-  <section *ngIf="isLoading" class="section-py min-h-[50vh] flex items-center justify-center bg-white">
-    <div class="animate-pulse flex flex-col items-center">
-      <div class="w-12 h-12 border-4 border-gray-200 border-t-black rounded-full animate-spin mb-4"></div>
-      <div class="text-sm font-bold text-gray-400 tracking-widest uppercase">Loading Advisory</div>
+  <section *ngIf="isLoading" class="section-py min-h-[50vh] flex items-center justify-center">
+    <div class="flex flex-col items-center">
+      <div class="w-12 h-12 border-2 border-white/10 border-t-white/60 rounded-full animate-spin mb-4"></div>
+      <div class="text-xs font-bold text-slate-500 tracking-widest uppercase">Loading Articles</div>
     </div>
   </section>
 
   <ng-container *ngIf="!isLoading">
     
     <!-- Featured Article -->
-    <section class="section-py border-b border-gray-100 bg-white" *ngIf="featuredPost">
+    <section class="section-py border-b border-white/5 relative" *ngIf="featuredPost">
       <div class="container-xl">
-        <div class="mb-12 animate-fade-up">
-          <span class="eyebrow">Featured Advisory</span>
+        <div class="mb-10 animate-fade-up">
+          <span class="eyebrow !text-slate-400">Featured Advisory</span>
         </div>
         
-        <a [routerLink]="['/blog', featuredPost.slug]" class="group block relative overflow-hidden rounded-md border border-gray-200 shadow-sm hover:shadow-xl hover:border-black transition-all duration-500 animate-fade-up stagger-1">
-          <div class="grid lg:grid-cols-2 lg:min-h-[500px]">
+        <a [routerLink]="['/blog', featuredPost.slug]" class="group card !p-0 overflow-hidden block hover:!border-white/20 animate-fade-up stagger-1">
+          <div class="grid lg:grid-cols-2 lg:min-h-[480px]">
             <!-- Image Area -->
-            <div class="relative min-h-[300px] lg:min-h-0 bg-gray-900 border-b lg:border-b-0 lg:border-r border-gray-200 overflow-hidden">
-              <img *ngIf="featuredPost.image" [src]="featuredPost.image" [alt]="featuredPost.title" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-80 group-hover:opacity-100">
+            <div class="relative min-h-[300px] lg:min-h-0 bg-slate-900 border-b lg:border-b-0 lg:border-r border-white/5 overflow-hidden">
+              <img *ngIf="featuredPost.image" [src]="featuredPost.image" [alt]="featuredPost.title" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+              <div class="absolute inset-0 bg-gradient-to-r from-slate-900/20 to-transparent"></div>
             </div>
             
             <!-- Content Area -->
-            <div class="bg-gray-50 p-8 lg:p-16 flex flex-col justify-center">
-              <div class="flex items-center gap-4 mb-6">
-                <span class="text-xs font-bold tracking-widest uppercase text-black">{{ featuredPost.category }}</span>
-                <span class="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-                <span class="text-xs font-bold tracking-widest uppercase text-gray-400">{{ featuredPost.readTime }}</span>
+            <div class="p-10 lg:p-16 flex flex-col justify-center">
+              <div class="flex items-center gap-4 mb-8">
+                <span class="text-xs font-bold tracking-widest uppercase text-white">{{ featuredPost.category }}</span>
+                <span class="w-1.5 h-1.5 bg-white/20 rounded-full"></span>
+                <span class="text-xs font-bold tracking-widest uppercase text-slate-400">{{ featuredPost.readTime }}</span>
               </div>
               
-              <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6 group-hover:text-gray-500 transition-colors leading-tight">
+              <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6 group-hover:text-slate-300 transition-colors leading-tight text-white">
                 {{ featuredPost.title }}
               </h2>
               
-              <p class="text-lg text-gray-600 mb-10 line-clamp-3 leading-relaxed">
+              <p class="text-lg text-slate-400 mb-10 line-clamp-3 leading-relaxed">
                 {{ featuredPost.excerpt }}
               </p>
 
               <div class="mt-auto flex flex-wrap gap-2">
                 @for (tag of featuredPost.tags; track tag) {
-                  <span class="tag tag-outline !bg-white cursor-default">#{{ tag }}</span>
+                  <span class="tag !bg-white/5 !border-white/10 !text-slate-400 cursor-default">#{{ tag }}</span>
                 }
               </div>
             </div>
@@ -65,47 +69,48 @@
     </section>
 
     <!-- Articles Grid -->
-    <section class="section-py bg-white" *ngIf="posts.length">
+    <section class="section-py relative" *ngIf="posts.length">
       <div class="container-xl">
         <div class="mb-12 animate-fade-up flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <span class="eyebrow !mb-0">Recent Publications</span>
+          <span class="eyebrow !mb-0 !text-slate-400">Recent Publications</span>
           
+          <!-- Category Filter Pills -->
           <div class="flex flex-wrap gap-2">
             @for (cat of categories; track cat) {
               <button 
                 (click)="setCategory(cat)"
-                class="px-5 py-2 text-[0.65rem] font-bold tracking-widest uppercase transition-colors rounded border"
-                [class.bg-black]="activeCategory === cat"
-                [class.text-white]="activeCategory === cat"
-                [class.border-black]="activeCategory === cat"
-                [class.bg-white]="activeCategory !== cat"
-                [class.text-gray-500]="activeCategory !== cat"
-                [class.border-gray-200]="activeCategory !== cat"
-                [class.hover:border-black]="activeCategory !== cat"
-                [class.hover:text-black]="activeCategory !== cat">
+                class="px-5 py-2.5 text-[0.65rem] font-bold tracking-widest uppercase transition-all duration-200 rounded-full border"
+                [class.bg-white]="activeCategory === cat"
+                [class.text-slate-900]="activeCategory === cat"
+                [class.border-white]="activeCategory === cat"
+                [class.bg-transparent]="activeCategory !== cat"
+                [class.text-slate-400]="activeCategory !== cat"
+                [class.border-white/10]="activeCategory !== cat"
+                [class.hover:border-white/30]="activeCategory !== cat"
+                [class.hover:text-white]="activeCategory !== cat">
                 {{ cat }}
               </button>
             }
           </div>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12" *ngIf="filteredPosts.length; else noPosts">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" *ngIf="filteredPosts.length; else noPosts">
           @for (post of filteredPosts; track post.id) {
-            <a [routerLink]="['/blog', post.slug]" class="group flex flex-col items-start border-t border-black hover:border-gray-400 transition-colors pt-6 animate-fade-up stagger-1">
-              <div class="flex w-full items-center justify-between mb-4">
-                <span class="text-[0.65rem] font-bold text-black tracking-widest uppercase">{{ post.category }}</span>
-                <span class="text-[0.65rem] font-bold text-gray-400 tracking-widest uppercase">{{ post.readTime }}</span>
+            <a [routerLink]="['/blog', post.slug]" class="group flex flex-col p-8 rounded-[2rem] bg-slate-800/20 border border-white/5 hover:border-white/20 hover:bg-slate-800/40 hover:-translate-y-2 transition-all duration-300 animate-fade-up stagger-1">
+              <div class="flex w-full items-center justify-between mb-6">
+                <span class="text-[0.65rem] font-bold text-white tracking-widest uppercase">{{ post.category }}</span>
+                <span class="text-[0.65rem] font-bold text-slate-500 tracking-widest uppercase">{{ post.readTime }}</span>
               </div>
               
-              <h3 class="text-xl lg:text-2xl font-black mb-4 group-hover:text-gray-500 transition-colors leading-tight">{{ post.title }}</h3>
+              <h3 class="text-xl lg:text-2xl font-black mb-4 group-hover:text-white text-slate-200 transition-colors leading-tight">{{ post.title }}</h3>
               
-              <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-8 flex-grow">
+              <p class="text-sm text-slate-400 line-clamp-3 leading-relaxed mb-8 flex-grow">
                 {{ post.excerpt }}
               </p>
 
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5">
                 @for (tag of post.tags; track tag) {
-                  <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">#{{ tag }}</span>
+                  <span class="text-[10px] uppercase font-bold text-slate-500 bg-slate-900/50 px-2 py-1 rounded tracking-wider">#{{ tag }}</span>
                 }
               </div>
             </a>
@@ -113,8 +118,9 @@
         </div>
         
         <ng-template #noPosts>
-          <div class="py-12 text-center border border-dashed border-gray-200 rounded-lg">
-            <p class="text-sm font-bold tracking-widest uppercase text-gray-400">No advisory posts found in this category.</p>
+          <div class="py-20 text-center card !bg-slate-800/10 !border-white/5">
+            <mat-icon class="!text-[48px] !w-[48px] !h-[48px] text-slate-600 mb-4 block mx-auto">article</mat-icon>
+            <p class="text-sm font-bold tracking-widest uppercase text-slate-500">No articles found in this category.</p>
           </div>
         </ng-template>
       </div>
