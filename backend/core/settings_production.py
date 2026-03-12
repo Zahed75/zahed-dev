@@ -12,12 +12,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
-    'thezhasan.com',
-    'api.thezhasan.com',
-    'www.thezhasan.com',
-    os.environ.get('VPS_IP', '156.67.216.209'),
-]
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'thezhasan.com,api.thezhasan.com,www.thezhasan.com,156.67.216.209,localhost').split(',')
+
+# ── Proxy SSL Header ─────────────────────────────────────
+# This is critical for Django to know it's behind a secure Nginx proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 # ── Apps ──────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -84,6 +85,8 @@ DATABASES = {
 CORS_ALLOWED_ORIGINS = [
     'https://thezhasan.com',
     'https://www.thezhasan.com',
+    'http://localhost:4200',
+    'http://156.67.216.209:4200',
 ]
 CORS_ALLOW_CREDENTIALS = True
 

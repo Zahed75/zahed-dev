@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
 
 # Set workdir
 WORKDIR /app
+RUN mkdir -p /app/staticfiles /app/media
 
 # Copy requirements first (layer cache)
 COPY requirements.txt .
