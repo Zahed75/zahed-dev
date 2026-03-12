@@ -1,4 +1,6 @@
 from .models import Project, Testimonial, BlogPost, FAQ, Experience, Skill, ContactMessage, Resume, HomepageContent
+from rest_framework import viewsets
+from rest_framework.response import Response
 from django.core.mail import send_mail
 from django.conf import settings
 from .serializers import (
