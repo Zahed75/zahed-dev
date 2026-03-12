@@ -1,8 +1,5 @@
-# ─────────────────────────────────────────────
-# Dockerfile — Django Backend (zahed-dev)
-# Deploy on Linux VPS
-# ─────────────────────────────────────────────
-FROM python:3.11-slim
+# Stage 1: Django Backend
+FROM python:3.12-slim
 
 # System deps
 RUN apt-get update && apt-get install -y \
