@@ -16,7 +16,7 @@ ALLOWED_HOSTS = [
     'thezhasan.com',
     'api.thezhasan.com',
     'www.thezhasan.com',
-    os.environ.get('VPS_IP', ''),
+    os.environ.get('VPS_IP', '156.67.216.209'),
 ]
 
 # ── Apps ──────────────────────────────────────────────────
