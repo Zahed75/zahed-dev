@@ -1,5 +1,4 @@
-# Stage 1: Build
-FROM node:20-alpine AS build
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -7,20 +6,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy source and build
+# Copy source
 COPY . .
-RUN npx ng build --configuration production
 
-# Stage 2: Serve
-FROM nginx:stable-alpine
+# Expose dev port
+EXPOSE 4200
 
-# Copy custom nginx configuration
-COPY nginx/frontend.conf /etc/nginx/conf.d/default.conf
-
-# Copy build artifacts from stage 1
-# Note: @angular/build:application puts files in dist/zahed-dev/browser
-COPY --from=build /app/dist/zahed-dev/browser /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Start dev server
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]

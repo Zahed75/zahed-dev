@@ -1,6 +1,23 @@
-version: '3.9'
+version: '3.8'
 
 services:
+  # ─── Angular Frontend ──────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    container_name: zahed_frontend
+    restart: unless-stopped
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
+
   # ─── Django API Backend ───────────────────────────────────
   backend:
     build:
@@ -20,13 +37,11 @@ services:
       - DB_USER=${DB_USER:-zahed}
       - DB_PASSWORD=${DB_PASSWORD}
     volumes:
-      - media_files:/app/media
-      - static_files:/app/static
+      - ./backend:/app
+      - /app/venv
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - zahed_net
 
   # ─── MySQL Database ────────────────────────────────────────
   db:
@@ -44,44 +59,6 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
-    networks:
-      - zahed_net
-
-  # ─── Nginx Reverse Proxy ───────────────────────────────────
-  nginx:
-    image: nginx:1.27-alpine
-    container_name: zahed_nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - media_files:/var/www/media:ro
-      - static_files:/var/www/static:ro
-      - certbot_certs:/etc/letsencrypt:ro
-      - certbot_www:/var/www/certbot:ro
-    depends_on:
-      - backend
-    networks:
-      - zahed_net
-
-  # ─── Certbot (SSL) ────────────────────────────────────────
-  certbot:
-    image: certbot/certbot:latest
-    container_name: zahed_certbot
-    volumes:
-      - certbot_certs:/etc/letsencrypt
-      - certbot_www:/var/www/certbot
-    command: certonly --webroot --webroot-path /var/www/certbot --email zahed.hasan.rabbi@gmail.com --agree-tos --no-eff-email -d thezhasan.com -d api.thezhasan.com
 
 volumes:
   mysql_data:
-  media_files:
-  static_files:
-  certbot_certs:
-  certbot_www:
-
-networks:
-  zahed_net:
-    driver: bridge
