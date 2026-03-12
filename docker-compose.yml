@@ -30,9 +30,11 @@ services:
     ports:
       - "8001:8000"
     environment:
+      - DJANGO_SETTINGS_MODULE=core.settings_production
       - DJANGO_DEBUG=False
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:-django-insecure-default-key-replace-me}
-      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS:-thezhasan.com,api.thezhasan.com,localhost}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS:-thezhasan.com,api.thezhasan.com,www.thezhasan.com,localhost,156.67.216.209}
+      - VPS_IP=156.67.216.209
       - DB_HOST=db
       - DB_PORT=3306
       - DB_NAME=${DB_NAME:-zahed_portfolio}
