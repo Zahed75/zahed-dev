@@ -47,6 +47,10 @@ export class ApiService {
     return this.http.get<any[]>(`${this.apiUrl}/resumes/`);
   }
 
+  getHomepageContent(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/homepage/`);
+  }
+
   sendContactMessage(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/contact/`, data);
   }

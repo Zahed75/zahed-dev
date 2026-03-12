@@ -1,5 +1,33 @@
 from django.contrib import admin
-from .models import Project, Testimonial, BlogPost, FAQ, Experience, Skill, ContactMessage, Resume
+from .models import Project, Testimonial, BlogPost, FAQ, Experience, Skill, ContactMessage, Resume, HomepageContent
+
+
+@admin.register(HomepageContent)
+class HomepageContentAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'updated_at']
+    
+    # Simple singleton pattern: prevent adding new ones if one already exists
+    def has_add_permission(self, request):
+        if self.model.objects.exists():
+            return False
+        return True
+
+    fieldsets = (
+        ('Hero Section', {
+            'fields': ('hero_eyebrow', 'hero_title', 'hero_description')
+        }),
+        ('Executive Summary', {
+            'fields': ('summary_eyebrow', 'summary_title', 'summary_content')
+        }),
+        ('Statistics', {
+            'fields': (
+                ('stat_1_value', 'stat_1_label'),
+                ('stat_2_value', 'stat_2_label'),
+                ('stat_3_value', 'stat_3_label'),
+                ('stat_4_value', 'stat_4_label'),
+            )
+        }),
+    )
 
 
 @admin.register(Project)

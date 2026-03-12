@@ -8,15 +8,12 @@
     <div class="container-xl relative z-10">
       <div class="max-w-4xl text-left">
         <div class="animate-fade-up">
-          <span class="eyebrow">Strategy · Engineering · Delivery</span>
-          <h1 class="heading-display mb-8">
-            Engineering Manager. <br/>
-            <span class="text-slate-500">Scale Architect.</span>
+          <span class="eyebrow">{{ homeContent.hero_eyebrow }}</span>
+          <h1 class="heading-display mb-8" [innerHTML]="homeContent.hero_title">
           </h1>
           
           <p class="body-lg max-w-2xl mb-12 animate-fade-up stagger-1 pl-4 border-l-2 border-slate-700">
-            Co-founder at <a href="https://syscomatic.com" target="_blank" class="font-bold text-white border-b-2 border-white/20 hover:border-white transition-colors">Syscomatic LLC</a>. 
-            I lead strategic software delivery, build high-performance distributed systems, and scale engineering organizations for internet companies worldwide.
+            {{ homeContent.hero_description }}
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4 animate-fade-up stagger-2">
@@ -38,21 +35,11 @@
       <div class="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
         
         <div class="lg:col-span-8 animate-fade-up">
-          <span class="eyebrow">Executive Summary</span>
+          <span class="eyebrow">{{ homeContent.summary_eyebrow }}</span>
           <h2 class="heading-xl mb-8">
-            Bridging Business Vision <br/>
-            With Technical Execution.
+            {{ homeContent.summary_title }}
           </h2>
-          <div class="prose-monochrome">
-            <p>
-              Results-oriented Software Engineer with 5+ years of experience architecting scalable web and mobile solutions for retail and e-commerce sectors.
-            </p>
-            <p class="mt-4">
-              Proven track record of optimizing operational costs by 30% and reducing audit processing times by 99% through process automation. Expert in building high-availability microservices and offline-first mobile architectures using Flutter, Django, Node.js, and Express.js.
-            </p>
-            <p class="mt-4">
-              Adept at leading backend migrations and implementing CI/CD pipelines to streamline deployment efficiency across distributed teams.
-            </p>
+          <div class="prose-monochrome" [innerHTML]="homeContent.summary_content">
           </div>
         </div>
 

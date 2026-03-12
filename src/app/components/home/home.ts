@@ -62,6 +62,15 @@ interface Experience {
 export class HomeComponent implements OnInit {
   calendlyUrl = 'https://calendly.com/zahed-hasan-rabbi/30min';
 
+  homeContent: any = {
+    hero_eyebrow: 'Strategy · Engineering · Delivery',
+    hero_title: 'Engineering Manager. Scale Architect.',
+    hero_description: 'Co-founder at Syscomatic LLC. I lead strategic software delivery, build high-performance distributed systems, and scale engineering organizations for internet companies worldwide.',
+    summary_eyebrow: 'Executive Summary',
+    summary_title: 'Bridging Business Vision With Technical Execution.',
+    summary_content: 'Results-oriented Software Engineer with 5+ years of experience architecting scalable web and mobile solutions for retail and e-commerce sectors.'
+  };
+
   leadershipSkills: string[] = [];
   technicalSkills: string[] = [];
   featuredProjects: FeaturedProject[] = [];
@@ -84,6 +93,19 @@ export class HomeComponent implements OnInit {
   }
 
   loadData(): void {
+    this.apiService.getHomepageContent().subscribe(content => {
+      if (content && Object.keys(content).length > 0) {
+        this.homeContent = content;
+        // Update stats if they are in the content
+        this.stats = [
+          { value: content.stat_1_value, label: content.stat_1_label },
+          { value: content.stat_2_value, label: content.stat_2_label },
+          { value: content.stat_3_value, label: content.stat_3_label },
+          { value: content.stat_4_value, label: content.stat_4_label }
+        ];
+      }
+    });
+
     this.apiService.getSkills().subscribe(skills => {
       this.leadershipSkills = skills.filter(s => s.category === 'leadership').map(s => s.name);
       this.technicalSkills = skills.filter(s => s.category === 'technical').map(s => s.name);

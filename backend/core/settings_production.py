@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'rest_framework',
     'corsheaders',
+    'django_ckeditor_5',
     'portfolio',
 ]
 
@@ -113,8 +114,40 @@ SECURE_SSL_REDIRECT = False  # Let Nginx handle SSL redirect to avoid host-heade
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-CSRF_USE_SESSIONS = False
 CSRF_COOKIE_HTTPONLY = False
+
+# ── Email Strategy (SMTP) ────────────────────────────────
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tech.syscomatic@gmail.com'
+EMAIL_HOST_PASSWORD = 'xrptxcraaeshyrcg'
+DEFAULT_FROM_EMAIL = 'Zahed Portfolio <tech.syscomatic@gmail.com>'
+
+# ── CKEditor 5 Configuration ─────────────────────────────
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': [
+            'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList',
+            'blockQuote', 'imageUpload', 'indent', 'outdent', 'insertTable', 'mediaEmbed', 'codeBlock', 'sourceEditing'
+        ],
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
+            'styles': ['alignLeft', 'alignCenter', 'alignRight']
+        }
+    }
+}
 
 # ── Static & Media ────────────────────────────────────────
 STATIC_URL = '/static/'

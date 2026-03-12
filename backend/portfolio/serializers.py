@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Project, Testimonial, BlogPost, FAQ, Experience, Skill, ContactMessage, Resume
+from .models import Project, Testimonial, BlogPost, FAQ, Experience, Skill, ContactMessage, Resume, HomepageContent
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,3 +40,8 @@ class ResumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resume
         fields = ['file', 'updated_at']
+
+class HomepageContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HomepageContent
+        fields = '__all__'

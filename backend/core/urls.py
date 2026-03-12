@@ -27,6 +27,7 @@ urlpatterns = [
     path('', api_root),
     path('admin/', admin.site.urls),
     path('api/', include('portfolio.urls')),
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
 ]
 
 if settings.DEBUG:

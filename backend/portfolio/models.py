@@ -1,5 +1,4 @@
-from django.db import models
-
+from django_ckeditor_5.fields import CKEditor5Field
 
 class Skill(models.Model):
     name = models.CharField(max_length=100)
@@ -31,7 +30,7 @@ class Project(models.Model):
     is_featured = models.BooleanField(default=False)
     client_background = models.TextField(blank=True)
     challenge = models.TextField(blank=True)
-    approach_solution = models.TextField(blank=True)
+    approach_solution = CKEditor5Field('Approach & Solution', config_name='extends', blank=True)
     key_features = models.JSONField(default=dict, blank=True)
     impact_detailed = models.JSONField(default=dict, blank=True)
     client_testimonial = models.TextField(blank=True)
@@ -77,7 +76,7 @@ class BlogPost(models.Model):
     author_role = models.CharField(max_length=100, default='Engineering Manager & Co-Founder')
     author_bio = models.TextField(blank=True)
     image = models.URLField(max_length=500, blank=True)
-    content = models.TextField(blank=True)
+    content = CKEditor5Field('Content', config_name='extends', blank=True)
     tags = models.JSONField(default=list, blank=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -144,3 +143,34 @@ class Resume(models.Model):
 
     def __str__(self):
         return f"Resume updated on {self.updated_at.strftime('%Y-%m-%d')}"
+
+
+class HomepageContent(models.Model):
+    hero_eyebrow = models.CharField(max_length=100, default="Strategy · Engineering · Delivery")
+    hero_title = models.CharField(max_length=200, default="Engineering Manager. Scale Architect.")
+    hero_description = models.TextField(default="Co-founder at Syscomatic LLC. I lead strategic software delivery, build high-performance distributed systems, and scale engineering organizations.")
+    
+    summary_eyebrow = models.CharField(max_length=100, default="Executive Summary")
+    summary_title = models.CharField(max_length=200, default="Bridging Business Vision With Technical Execution.")
+    summary_content = models.TextField(default="Results-oriented Software Engineer with 5+ years of experience...")
+
+    stat_1_value = models.CharField(max_length=50, default="50+")
+    stat_1_label = models.CharField(max_length=100, default="Engineers Led")
+    
+    stat_2_value = models.CharField(max_length=50, default="20+")
+    stat_2_label = models.CharField(max_length=100, default="Enterprise Systems Delivered")
+    
+    stat_3_value = models.CharField(max_length=50, default="5+")
+    stat_3_label = models.CharField(max_length=100, default="Global Markets")
+    
+    stat_4_value = models.CharField(max_length=50, default="10+")
+    stat_4_label = models.CharField(max_length=100, default="Years Building")
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Homepage Content"
+        verbose_name_plural = "Homepage Content"
+
+    def __str__(self):
+        return "Global Homepage Content Configuration"
