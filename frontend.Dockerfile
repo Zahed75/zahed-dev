@@ -2,15 +2,14 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json ./
-RUN npm install
+# Use npm ci for cleaner/faster builds if package-lock.json exists
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Copy source
 COPY . .
 
-# Expose dev port
+# Expose the dev server port
 EXPOSE 4200
 
-# Start dev server with host check disabled for reverse proxy support
+# Start dev server - host 0.0.0.0 and disable host check for reverse proxy access
 CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]
