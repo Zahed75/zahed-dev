@@ -5,10 +5,11 @@
   
   <div 
     class="mx-auto max-w-[1200px] rounded-[2rem] transition-all duration-500 border"
-    [class.bg-slate-900/40]="isScrolled"
+    class="mx-auto max-w-[1200px] rounded-[2rem] transition-all duration-500 border"
+    [class.bg-white/80]="isScrolled"
     [class.backdrop-blur-xl]="isScrolled"
-    [class.border-white/10]="isScrolled"
-    [class.shadow-[0_8px_32px_rgba(0,0,0,0.12)]]="isScrolled"
+    [class.border-gray-100]="isScrolled"
+    [class.shadow-[0_8px_32px_rgba(0,0,0,0.06)]]="isScrolled"
     [class.bg-transparent]="!isScrolled"
     [class.border-transparent]="!isScrolled"
     [class.shadow-none]="!isScrolled">
@@ -17,20 +18,20 @@
       
       <!-- Logo -->
       <a routerLink="/" class="flex flex-col relative z-50 group" (click)="closeMenu()">
-        <span class="text-xl lg:text-2xl font-black tracking-tight text-white leading-none group-hover:text-slate-300 transition-colors">Zahed Hasan</span>
-        <span class="text-[0.6rem] font-bold tracking-[0.25em] text-slate-400 uppercase mt-1">Engineering Manager</span>
+        <span class="text-xl lg:text-2xl font-black tracking-tight text-gray-900 leading-none group-hover:text-blue-600 transition-colors">Zahed Hasan</span>
+        <span class="text-[0.6rem] font-bold tracking-[0.25em] text-gray-500 uppercase mt-1">Engineering Manager</span>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center gap-8">
-        <a routerLink="/about-me" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">Strategy</a>
-        <a routerLink="/projects" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">Portfolio</a>
-        <a routerLink="/blog" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">Blogs</a>
-        <a routerLink="/contact" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">Contact</a>
+        <a routerLink="/about-me" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-gray-600 hover:text-blue-600 transition-colors">Strategy</a>
+        <a routerLink="/projects" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-gray-600 hover:text-blue-600 transition-colors">Portfolio</a>
+        <a routerLink="/blog" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-gray-600 hover:text-blue-600 transition-colors">Blogs</a>
+        <a routerLink="/contact" routerLinkActive="nav-link-active" class="text-sm font-semibold tracking-wide text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
         
-        <div class="w-px h-4 bg-white/10 mx-2"></div>
+        <div class="w-px h-4 bg-gray-200 mx-2"></div>
         
-        <a *ngIf="resumeUrl" [href]="resumeUrl" target="_blank" class="text-sm font-bold tracking-widest uppercase text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+        <a *ngIf="resumeUrl" [href]="resumeUrl" target="_blank" class="text-sm font-bold tracking-widest uppercase text-gray-500 hover:text-blue-600 transition-colors flex items-center gap-1.5">
           Resume <mat-icon class="!text-[14px] !w-[14px] !h-[14px]">download</mat-icon>
         </a>
         <a [href]="calendlyUrl" target="_blank" rel="noopener noreferrer" class="btn-primary !px-6 !py-2.5 !font-bold !text-xs !tracking-widest !uppercase !rounded-full">
@@ -40,7 +41,7 @@
 
       <!-- Mobile Menu Button -->
       <button 
-        class="lg:hidden p-2 -mr-2 text-white hover:text-slate-300 transition-colors relative z-50 focus:outline-none"
+        class="lg:hidden p-2 -mr-2 text-gray-900 hover:text-blue-600 transition-colors relative z-50 focus:outline-none"
         (click)="toggleMenu()"
         aria-label="Toggle menu">
         <div class="w-6 h-5 relative flex flex-col justify-between transform transition-all duration-300">
@@ -55,26 +56,26 @@
 
   <!-- Mobile Menu Overlay -->
   <div 
-    class="fixed inset-0 bg-slate-900/95 backdrop-blur-2xl z-40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden flex flex-col pt-32 pb-10 px-8 overflow-y-auto"
+    class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden flex flex-col pt-32 pb-10 px-8 overflow-y-auto"
     [class.opacity-100]="isMenuOpen"
     [class.pointer-events-auto]="isMenuOpen"
     [class.opacity-0]="!isMenuOpen"
     [class.pointer-events-none]="!isMenuOpen">
     
     <nav class="flex flex-col gap-6 sm:gap-8 text-2xl sm:text-4xl font-black uppercase tracking-tight mt-4 transition-all duration-700 delay-100" [class.translate-y-0]="isMenuOpen" [class.translate-y-10]="!isMenuOpen" [class.opacity-100]="isMenuOpen" [class.opacity-0]="!isMenuOpen">
-      <a routerLink="/" (click)="closeMenu()" class="text-white hover:text-slate-400 transition-colors py-2 border-b border-white/5 inline-block">Home</a>
-      <a routerLink="/about-me" (click)="closeMenu()" class="text-white hover:text-slate-400 transition-colors py-2 border-b border-white/5 inline-block">Strategy</a>
-      <a routerLink="/projects" (click)="closeMenu()" class="text-white hover:text-slate-400 transition-colors py-2 border-b border-white/5 inline-block">Portfolio</a>
-      <a routerLink="/blog" (click)="closeMenu()" class="text-white hover:text-slate-400 transition-colors py-2 border-b border-white/5 inline-block">Blogs</a>
-      <a routerLink="/contact" (click)="closeMenu()" class="text-white hover:text-slate-400 transition-colors py-2 border-b border-white/5 inline-block">Contact</a>
+      <a routerLink="/" (click)="closeMenu()" class="text-gray-900 hover:text-blue-600 transition-colors py-2 border-b border-gray-100 inline-block">Home</a>
+      <a routerLink="/about-me" (click)="closeMenu()" class="text-gray-900 hover:text-blue-600 transition-colors py-2 border-b border-gray-100 inline-block">Strategy</a>
+      <a routerLink="/projects" (click)="closeMenu()" class="text-gray-900 hover:text-blue-600 transition-colors py-2 border-b border-gray-100 inline-block">Portfolio</a>
+      <a routerLink="/blog" (click)="closeMenu()" class="text-gray-900 hover:text-blue-600 transition-colors py-2 border-b border-gray-100 inline-block">Blogs</a>
+      <a routerLink="/contact" (click)="closeMenu()" class="text-gray-900 hover:text-blue-600 transition-colors py-2 border-b border-gray-100 inline-block">Contact</a>
     </nav>
 
     <div class="mt-auto transition-all duration-700 delay-200" [class.translate-y-0]="isMenuOpen" [class.translate-y-10]="!isMenuOpen" [class.opacity-100]="isMenuOpen" [class.opacity-0]="!isMenuOpen">
       <div class="divider mb-8"></div>
-      <a *ngIf="resumeUrl" [href]="resumeUrl" target="_blank" (click)="closeMenu()" class="text-sm font-bold tracking-widest text-slate-400 hover:text-white uppercase transition-colors flex items-center gap-2 mb-6">
+      <a *ngIf="resumeUrl" [href]="resumeUrl" target="_blank" (click)="closeMenu()" class="text-sm font-bold tracking-widest text-gray-500 hover:text-blue-600 uppercase transition-colors flex items-center gap-2 mb-6">
         Download Resume <mat-icon class="!text-[16px] !w-[16px] !h-[16px]">download</mat-icon>
       </a>
-      <a [href]="calendlyUrl" target="_blank" rel="noopener noreferrer" (click)="closeMenu()" class="btn-primary w-full shadow-[0_8px_30px_rgba(255,255,255,0.1)] !py-4">
+      <a [href]="calendlyUrl" target="_blank" rel="noopener noreferrer" (click)="closeMenu()" class="btn-primary w-full shadow-lg !py-4">
         Schedule Advisory Call
       </a>
     </div>

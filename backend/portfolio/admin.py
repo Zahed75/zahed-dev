@@ -6,26 +6,28 @@ from .models import Project, Testimonial, BlogPost, FAQ, Experience, Skill, Cont
 class HomepageContentAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'updated_at']
     
-    # Simple singleton pattern: prevent adding new ones if one already exists
     def has_add_permission(self, request):
         if self.model.objects.exists():
             return False
         return True
 
     fieldsets = (
-        ('Hero Section', {
-            'fields': ('hero_eyebrow', 'hero_title', 'hero_description')
+        ('Hero Section (Above the fold)', {
+            'fields': ('hero_eyebrow', 'hero_title', 'hero_description'),
+            'description': "Update the primary messaging appearing at the top of the homepage."
         }),
         ('Executive Summary', {
-            'fields': ('summary_eyebrow', 'summary_title', 'summary_content')
+            'fields': ('summary_eyebrow', 'summary_title', 'summary_content'),
+            'description': "Refine the strategic narrative section."
         }),
-        ('Statistics', {
+        ('Key Performance Indicators (Stats)', {
             'fields': (
                 ('stat_1_value', 'stat_1_label'),
                 ('stat_2_value', 'stat_2_label'),
                 ('stat_3_value', 'stat_3_label'),
                 ('stat_4_value', 'stat_4_label'),
-            )
+            ),
+            'description': "Update the counter metrics shown in the hero/middle sections."
         }),
     )
 

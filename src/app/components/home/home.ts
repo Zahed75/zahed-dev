@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
       this.featuredProjects = projects
         .filter(p => p.is_featured)
         .slice(0, 4)
-        .map(p => ({
+        .map((p, index) => ({
           id: p.id,
           title: p.title,
           industry: p.industry,
@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit {
           description: p.description,
           tech: p.tech,
           slug: p.slug,
-          image: p.image
+          image: p.image || (index === 0 ? '/media/projects/poc_academy.png' : '')
         }));
     });
 
